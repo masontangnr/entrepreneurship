@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Closet Club – Dignity Through Giving</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --purple:       #7B4FA6;
+            --purple-dark:  #5A3380;
+            --purple-light: #9B6CC8;
+            --purple-pale:  #F4EBF9;
+            --purple-soft:  #E2D0F0;
+            --white:        #FFFFFF;
+            --off-white:    #FAFAFA;
+            --text-dark:    #1C1024;
+            --text-mid:     #4A3B5C;
+            --text-gray:    #8B7FA0;
+            --shadow:       0 4px 24px rgba(123,79,166,.12);
+            --shadow-hover: 0 8px 40px rgba(123,79,166,.22);
+            --radius:       16px;
+            --radius-sm:    8px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.7;
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(123,79,166,.1);
+            padding: 0 5%;
+            transition: box-shadow .3s;
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 74px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 18px;
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--purple-dark);
+            line-height: 1.2;
+        }
+        .logo-text span {
+            display: block;
+            font-size: .62rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: var(--text-gray);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-phone {
+            display: flex; align-items: center; gap: 8px;
+            color: var(--text-mid); font-size: .9rem; font-weight: 500;
+            text-decoration: none; transition: color .2s;
+        }
+        .nav-phone:hover { color: var(--purple); }
+        .nav-phone i { color: var(--purple); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            color: white; border: none;
+            padding: 11px 26px; border-radius: 50px;
+            font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 600;
+            cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: all .3s ease;
+            box-shadow: 0 4px 16px rgba(123,79,166,.3);
+            white-space: nowrap;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(123,79,166,.4); }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #3D1560 0%, #6B3399 45%, #9B6CC8 100%);
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 120px 5% 80px;
+            position: relative; overflow: hidden;
+        }
+        #hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(255,255,255,.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,255,255,.06) 0%, transparent 50%);
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 780px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,.25);
+            color: white; padding: 8px 20px; border-radius: 50px;
+            font-size: .82rem; font-weight: 500; margin-bottom: 28px;
+            letter-spacing: .05em;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 700; color: white; line-height: 1.1;
+            margin-bottom: 24px;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem; color: rgba(255,255,255,.85);
+            max-width: 580px; margin: 0 auto 40px;
+            font-weight: 300; line-height: 1.8;
+        }
+        .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-white {
+            background: white; color: var(--purple-dark); border: none;
+            padding: 14px 32px; border-radius: 50px;
+            font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 600;
+            cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: all .3s ease; box-shadow: 0 4px 20px rgba(0,0,0,.15);
+        }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
+        .btn-outline-white {
+            background: transparent; color: white;
+            border: 2px solid rgba(255,255,255,.6);
+            padding: 14px 32px; border-radius: 50px;
+            font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 600;
+            cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: all .3s ease;
+        }
+        .btn-outline-white:hover { background: rgba(255,255,255,.15); border-color: white; transform: translateY(-2px); }
+        .hero-scroll {
+            position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,.55); font-size: .75rem; letter-spacing: .1em;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            text-transform: uppercase;
+        }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+        .hero-scroll i { animation: bounce 2s infinite; }
+
+        /* ── SHARED SECTION STYLES ── */
+        section { padding: 96px 5%; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-label {
+            font-size: .78rem; font-weight: 600; letter-spacing: .12em;
+            text-transform: uppercase; color: var(--purple); margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.9rem, 4vw, 2.9rem);
+            font-weight: 700; color: var(--text-dark);
+            line-height: 1.2; margin-bottom: 18px;
+        }
+        .section-subtitle {
+            font-size: 1.05rem; color: var(--text-gray);
+            max-width: 600px; line-height: 1.8;
+        }
+        .text-center { text-align: center; }
+        .text-center .section-subtitle { margin: 0 auto; }
+
+        /* ── MISSION ── */
+        #mission { background: var(--off-white); }
+        .mission-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 64px; align-items: center; margin-top: 60px;
+        }
+        .mission-text p { color: var(--text-mid); font-size: 1.03rem; line-height: 1.9; margin-bottom: 18px; }
+        .mission-highlights { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+        .highlight-item { display: flex; gap: 16px; align-items: flex-start; }
+        .highlight-icon {
+            width: 48px; height: 48px; min-width: 48px;
+            background: linear-gradient(135deg, var(--purple-pale), var(--purple-soft));
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+        .highlight-text h4 { font-weight: 600; color: var(--text-dark); margin-bottom: 3px; }
+        .highlight-text p { font-size: .88rem; color: var(--text-gray); margin: 0; }
+
+        .mission-visual {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+            border-radius: 24px; padding: 40px; color: white;
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .stat-card {
+            background: rgba(255,255,255,.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 16px; padding: 28px; text-align: center;
+        }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem; font-weight: 700; line-height: 1; margin-bottom: 6px;
+        }
+        .stat-label { font-size: .88rem; opacity: .85; line-height: 1.4; }
+        .eco-badge {
+            background: rgba(255,255,255,.12);
+            border-radius: 12px; padding: 18px 20px;
+            display: flex; gap: 14px; align-items: flex-start;
+        }
+        .eco-badge span { font-size: 1.5rem; flex-shrink: 0; }
+        .eco-badge h4 { font-family: 'Playfair Display', serif; font-size: .95rem; margin-bottom: 4px; }
+        .eco-badge p { font-size: .82rem; opacity: .85; line-height: 1.6; margin: 0; }
+
+        /* ── PROCESS ── */
+        #process { background: var(--white); }
+        .process-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 28px; margin-top: 60px;
+        }
+        .step-card {
+            background: var(--white);
+            border: 1px solid rgba(123,79,166,.12);
+            border-radius: var(--radius);
+            padding: 36px 28px; position: relative;
+            transition: all .3s ease;
+        }
+        .step-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--purple-soft); }
+        .step-number {
+            position: absolute; top: -16px; left: 28px;
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            color: white; width: 34px; height: 34px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .8rem; font-weight: 700;
+        }
+        .step-icon { font-size: 2rem; margin-bottom: 18px; display: block; }
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem; font-weight: 600; color: var(--text-dark); margin-bottom: 10px;
+        }
+        .step-desc { font-size: .92rem; color: var(--text-gray); line-height: 1.7; }
+
+        /* ── DIFFERENCE ── */
+        #difference { background: var(--purple-pale); }
+        .diff-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 24px; margin-top: 60px;
+        }
+        .diff-card {
+            background: white; border-radius: var(--radius);
+            padding: 40px 30px; text-align: center;
+            box-shadow: var(--shadow); transition: all .3s ease;
+        }
+        .diff-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .diff-icon {
+            width: 70px; height: 70px;
+            background: linear-gradient(135deg, var(--purple-pale), var(--purple-soft));
+            border-radius: 20px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; margin: 0 auto 22px;
+        }
+        .diff-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem; font-weight: 600; color: var(--text-dark); margin-bottom: 12px;
+        }
+        .diff-card p { font-size: .92rem; color: var(--text-gray); line-height: 1.75; }
+
+        /* ── PARTNER BANNER ── */
+        #partner {
+            background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+            padding: 56px 5%; text-align: center; color: white;
+        }
+        #partner .section-inner {
+            display: flex; align-items: center; justify-content: center;
+            gap: 48px; flex-wrap: wrap;
+        }
+        .partner-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; font-weight: 700; margin-bottom: 6px;
+        }
+        .partner-text p { opacity: .82; font-size: .98rem; }
+        .partner-pill {
+            background: rgba(255,255,255,.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,.28);
+            border-radius: 20px; padding: 22px 32px;
+            display: flex; align-items: center; gap: 16px;
+        }
+        .partner-pill i { font-size: 2.2rem; opacity: .9; }
+        .partner-pill .pname {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem; font-weight: 700;
+        }
+        .partner-pill .psub { font-size: .82rem; opacity: .72; margin-top: 2px; }
+
+        /* ── ABOUT ── */
+        #about { background: var(--white); }
+        .about-grid {
+            display: grid; grid-template-columns: 340px 1fr;
+            gap: 72px; align-items: center; margin-top: 60px;
+        }
+        .photo-placeholder {
+            width: 100%; aspect-ratio: 4/5;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+            border-radius: 24px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: white; gap: 14px; position: relative;
+        }
+        .photo-placeholder i { font-size: 3.5rem; opacity: .7; }
+        .photo-placeholder p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem; font-weight: 600;
+            text-align: center; line-height: 1.3;
+        }
+        .photo-badge {
+            position: absolute; bottom: -18px; right: -18px;
+            background: var(--purple-dark); color: white;
+            padding: 14px 18px; border-radius: 14px; text-align: center;
+            box-shadow: 0 8px 24px rgba(90,51,128,.35);
+        }
+        .photo-badge .big-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; font-weight: 700; line-height: 1;
+        }
+        .photo-badge .small-text { font-size: .7rem; opacity: .82; }
+        .about-content p { color: var(--text-mid); font-size: 1.03rem; line-height: 1.9; margin-bottom: 18px; }
+        .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+        .tag {
+            background: var(--purple-pale); color: var(--purple-dark);
+            padding: 7px 16px; border-radius: 50px;
+            font-size: .82rem; font-weight: 500;
+            border: 1px solid var(--purple-soft);
+        }
+
+        /* ── TESTIMONIALS ── */
+        #testimonials { background: var(--off-white); }
+        .testimonial-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 24px; margin-top: 60px;
+        }
+        .testimonial-card {
+            background: white; border-radius: var(--radius);
+            padding: 36px; box-shadow: var(--shadow);
+            transition: all .3s ease; display: flex; flex-direction: column;
+        }
+        .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem; color: var(--purple-soft);
+            line-height: .6; margin-bottom: 18px; display: block;
+        }
+        .testimonial-text {
+            font-size: .95rem; color: var(--text-mid);
+            line-height: 1.8; font-style: italic;
+            flex: 1; margin-bottom: 24px;
+        }
+        .t-author { display: flex; align-items: center; gap: 14px; }
+        .t-avatar {
+            width: 46px; height: 46px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: white; font-size: 1.05rem; flex-shrink: 0;
+        }
+        .t-name { font-weight: 600; color: var(--text-dark); font-size: .92rem; }
+        .t-role { font-size: .78rem; color: var(--text-gray); }
+        .stars { color: #F0B429; font-size: .8rem; margin-bottom: 3px; }
+
+        /* ── CONTACT ── */
+        #contact { background: var(--white); }
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1.5fr;
+            gap: 72px; align-items: start; margin-top: 60px;
+        }
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.55rem; font-weight: 700; color: var(--text-dark); margin-bottom: 14px;
+        }
+        .contact-info > p { color: var(--text-gray); line-height: 1.8; margin-bottom: 30px; }
+        .contact-details { display: flex; flex-direction: column; gap: 18px; }
+        .cdetail { display: flex; gap: 14px; align-items: flex-start; }
+        .cdetail-icon {
+            width: 42px; height: 42px; min-width: 42px;
+            background: var(--purple-pale); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--purple); font-size: .95rem;
+        }
+        .cdetail-text h4 { font-weight: 600; color: var(--text-dark); margin-bottom: 2px; font-size: .92rem; }
+        .cdetail-text p, .cdetail-text a {
+            font-size: .9rem; color: var(--text-gray); text-decoration: none;
+        }
+        .cdetail-text a:hover { color: var(--purple); }
+
+        .contact-form {
+            background: var(--off-white); border-radius: var(--radius);
+            padding: 44px; border: 1px solid rgba(123,79,166,.1);
+        }
+        .contact-form h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem; font-weight: 700; color: var(--text-dark); margin-bottom: 26px;
+        }
+        .form-group { margin-bottom: 18px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .form-group label {
+            display: block; font-size: .84rem; font-weight: 500;
+            color: var(--text-mid); margin-bottom: 7px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%; padding: 13px 15px;
+            border: 1.5px solid rgba(123,79,166,.2);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif; font-size: .92rem;
+            color: var(--text-dark); background: white;
+            transition: all .2s; outline: none; appearance: none;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(123,79,166,.1);
+        }
+        .form-group textarea { resize: vertical; min-height: 110px; }
+        .form-submit {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            color: white; border: none; border-radius: 50px;
+            font-family: 'Inter', sans-serif; font-size: .98rem; font-weight: 600;
+            cursor: pointer; transition: all .3s ease;
+            box-shadow: 0 4px 16px rgba(123,79,166,.3); margin-top: 6px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(123,79,166,.4); }
+
+        /* ── FOOTER ── */
+        footer {
+            background: linear-gradient(135deg, #2A0D4E 0%, #4A1E7A 100%);
+            color: white; padding: 64px 5% 28px;
+        }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer-top {
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 56px; margin-bottom: 52px;
+        }
+        .footer-brand p {
+            margin-top: 16px; font-size: .88rem;
+            color: rgba(255,255,255,.6); line-height: 1.8; max-width: 280px;
+        }
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700; font-size: 1.1rem; color: white; line-height: 1.2;
+        }
+        .footer-logo-text span {
+            display: block; font-size: .6rem; font-family: 'Inter', sans-serif;
+            font-weight: 500; color: rgba(255,255,255,.5);
+            letter-spacing: .08em; text-transform: uppercase;
+        }
+        .footer-socials { display: flex; gap: 10px; margin-top: 22px; }
+        .social-icon {
+            width: 38px; height: 38px;
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.75); font-size: .95rem; text-decoration: none;
+            transition: all .2s;
+        }
+        .social-icon:hover { background: var(--purple); border-color: var(--purple); color: white; transform: translateY(-2px); }
+        .footer-col h4 {
+            font-weight: 600; font-size: .8rem; letter-spacing: .08em;
+            text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 18px;
+        }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+        .footer-col ul li a {
+            color: rgba(255,255,255,.7); text-decoration: none;
+            font-size: .9rem; transition: color .2s;
+        }
+        .footer-col ul li a:hover { color: white; }
+        .fcontact { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.7); font-size: .9rem; margin-bottom: 12px; }
+        .fcontact i { color: var(--purple-light); width: 14px; }
+        .fcontact a { color: rgba(255,255,255,.7); text-decoration: none; }
+        .fcontact a:hover { color: white; }
+        .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin-bottom: 24px; }
+        .footer-bottom {
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 12px;
+        }
+        .footer-bottom p { font-size: .82rem; color: rgba(255,255,255,.38); }
+        .footer-bottom-links { display: flex; gap: 20px; }
+        .footer-bottom-links a {
+            font-size: .82rem; color: rgba(255,255,255,.38);
+            text-decoration: none; transition: color .2s;
+        }
+        .footer-bottom-links a:hover { color: rgba(255,255,255,.75); }
+
+        /* ── FADE-IN ANIMATION ── */
+        .fade-in {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity .65s ease, transform .65s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .mission-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-photo-wrap { max-width: 340px; margin: 0 auto; }
+            .process-grid { grid-template-columns: repeat(2,1fr); }
+            .diff-grid { grid-template-columns: repeat(2,1fr); }
+            .testimonial-grid { grid-template-columns: repeat(2,1fr); }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 768px) {
+            .nav-phone { display: none; }
+            section { padding: 72px 4%; }
+            .process-grid, .diff-grid, .testimonial-grid { grid-template-columns: 1fr; }
+            .stat-row { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .contact-form { padding: 28px 20px; }
+            .footer-top { grid-template-columns: 1fr; gap: 36px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            #partner .section-inner { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════════ -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <div class="logo-icon">
+                <i class="fas fa-shirt"></i>
+            </div>
+            <div class="logo-text">
+                Clean Closet Club
+                <span>Dignity Through Giving</span>
+            </div>
+        </a>
+        <div class="nav-right">
+            <a href="tel:2819109456" class="nav-phone">
+                <i class="fas fa-phone"></i>
+                (281) 910-9456
+            </a>
+            <!-- Replace href="#" with your actual Google Form or sign-up sheet URL -->
+            <a href="#contact" class="btn-primary">
+                <i class="fas fa-heart"></i>
+                Sign Up to Donate
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section id="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fas fa-crown"></i>
+            Proudly Serving Texas Communities
+        </div>
+        <h1 class="hero-title">Clean Closet Club</h1>
+        <p class="hero-subtitle">
+            Turning gently used clothing into renewed confidence —
+            wrapped with care, delivered with dignity.
+        </p>
+        <div class="hero-actions">
+            <!-- Replace href="#contact" with your actual sign-up form URL -->
+            <a href="#contact" class="btn-white">
+                <i class="fas fa-gift"></i>
+                Schedule a Pickup
+            </a>
+            <a href="#about" class="btn-outline-white">
+                <i class="fas fa-info-circle"></i>
+                Our Story
+            </a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <span>Scroll</span>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     MISSION
+════════════════════════════════════════════════ -->
+<section id="mission">
+    <div class="section-inner">
+        <div class="section-label">Our Mission</div>
+        <h2 class="section-title">Where Compassion Meets Action</h2>
+        <p class="section-subtitle">We bridge the gap between those with too much and those in need — making giving simple, dignified, and meaningful for everyone.</p>
+
+        <div class="mission-grid">
+            <div class="mission-text fade-in">
+                <p>At Clean Closet Club, we believe that everyone deserves to feel confident and cared for — especially during life's most challenging chapters. We collect gently used clothing and accessories from donors right at their doorstep and thoughtfully deliver them to individuals and families in need through our partnership with <strong>Clothed by Faith</strong>.</p>
+                <p>What sets us apart is the heart we put into every step. Recipients don't just receive a bag of clothes — they receive a beautifully wrapped <strong>purple gift bag</strong>, because dignity matters just as much as the donation itself.</p>
+
+                <div class="mission-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🎁</div>
+                        <div class="highlight-text">
+                            <h4>Purple Gift Bag Packaging</h4>
+                            <p>Every recipient receives their items wrapped with care — preserving dignity in every delivery.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🚗</div>
+                        <div class="highlight-text">
+                            <h4>Free Doorstep Pickup</h4>
+                            <p>We come to you. No driving, no drop-offs — making donating as easy as opening your front door.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">💜</div>
+                        <div class="highlight-text">
+                            <h4>Partnered with Clothed by Faith</h4>
+                            <p>Our trusted local charity partner ensures your donations reach those who need them most.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mission-visual fade-in">
+                <div class="stat-row">
+                    <div class="stat-card">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Years of Dedicated Service</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3K+</div>
+                        <div class="stat-label">Items Donated &amp; Counting</div>
+                    </div>
+                </div>
+                <div class="stat-card" style="text-align:left; padding: 24px;">
+                    <p style="font-size:.95rem; line-height:1.7; opacity:.9;">
+                        "We restore dignity and peace on the giving <em>and</em> receiving end — because every person deserves to feel seen, valued, and cared for."
+                    </p>
+                    <p style="font-size:.8rem; opacity:.65; margin-top:10px; margin-bottom:0;">— Lauren Carlsen, Founder</p>
+                </div>
+                <div class="eco-badge">
+                    <span>♻️</span>
+                    <div>
+                        <h4>Zero-Waste Promise</h4>
+                        <p>Items that can't be donated are recycled into thread, rope, and even rubber padding for playgrounds. Nothing goes to waste.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROCESS
+════════════════════════════════════════════════ -->
+<section id="process">
+    <div class="section-inner">
+        <div class="text-center">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">From Your Closet to Their Confidence</h2>
+            <p class="section-subtitle">A thoughtful, seamless process — from your front door all the way to a beautifully wrapped gift in someone's hands.</p>
+        </div>
+
+        <div class="process-grid">
+            <div class="step-card fade-in">
+                <div class="step-number">1</div>
+                <span class="step-icon">🚗</span>
+                <h3 class="step-title">Donation Pickup</h3>
+                <p class="step-desc">We drive directly to your home and collect your gently used clothing and accessories. No hassle, no extra trips — we make giving effortless for you.</p>
+            </div>
+            <div class="step-card fade-in">
+                <div class="step-number">2</div>
+                <span class="step-icon">🏠</span>
+                <h3 class="step-title">Transport to Charity</h3>
+                <p class="step-desc">All collected items are carefully transported to our partner, <strong>Clothed by Faith</strong>, where the sorting process begins.</p>
+            </div>
+            <div class="step-card fade-in">
+                <div class="step-number">3</div>
+                <span class="step-icon">👗</span>
+                <h3 class="step-title">Careful Sorting</h3>
+                <p class="step-desc">Items are sorted with care — those ready to be gifted are organized by size and category, while others are sent to be recycled into new materials.</p>
+            </div>
+            <div class="step-card fade-in">
+                <div class="step-number">4</div>
+                <span class="step-icon">📋</span>
+                <h3 class="step-title">A Request Is Received</h3>
+                <p class="step-desc">We receive a request from someone in need, gathering details about their size, preferences, and needs so we can make their gift truly personal.</p>
+            </div>
+            <div class="step-card fade-in">
+                <div class="step-number">5</div>
+                <span class="step-icon">🛍️</span>
+                <h3 class="step-title">Personal Shopping</h3>
+                <p class="step-desc">We "go shopping" through our curated collection, hand-selecting items that fit and suit that specific person — making each gift feel truly chosen for them.</p>
+            </div>
+            <div class="step-card fade-in">
+                <div class="step-number">6</div>
+                <span class="step-icon">🎁</span>
+                <h3 class="step-title">Wrapped &amp; Sent with Love</h3>
+                <p class="step-desc">Items are beautifully packaged in our signature <strong>purple gift bag</strong> and sent off — because everyone deserves to feel like they're receiving a real gift.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     WHAT MAKES US DIFFERENT
+════════════════════════════════════════════════ -->
+<section id="difference">
+    <div class="section-inner">
+        <div class="text-center">
+            <div class="section-label">Why Choose Us</div>
+            <h2 class="section-title">Different by Design</h2>
+            <p class="section-subtitle">We do things differently — because the people we serve deserve more than the ordinary.</p>
+        </div>
+
+        <div class="diff-grid">
+            <div class="diff-card fade-in">
+                <div class="diff-icon">🎁</div>
+                <h3>Dignity in Every Delivery</h3>
+                <p>Recipients receive their clothes in a beautiful purple gift bag — not a trash bag. We believe the <em>way</em> you give matters just as much as <em>what</em> you give.</p>
+            </div>
+            <div class="diff-card fade-in">
+                <div class="diff-icon">🚗</div>
+                <h3>We Come to You</h3>
+                <p>Donating is made effortless. We drive to your home and pick up your items directly — removing every barrier between a generous heart and someone in need.</p>
+            </div>
+            <div class="diff-card fade-in">
+                <div class="diff-icon">♻️</div>
+                <h3>Zero-Waste Recycling</h3>
+                <p>Nothing goes to waste. Clothes that can't be gifted are transformed into thread, rope, and rubber playground padding — giving every item a meaningful second life.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PARTNER BANNER
+════════════════════════════════════════════════ -->
+<div id="partner">
+    <div class="section-inner">
+        <div class="partner-text">
+            <h2>Proudly Partnering With</h2>
+            <p>Together, we're making a lasting difference across our Texas community.</p>
+        </div>
+        <div class="partner-pill">
+            <i class="fas fa-hands-praying"></i>
+            <div>
+                <div class="pname">Clothed by Faith</div>
+                <div class="psub">Our Trusted Local Charity Partner</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     ABOUT LAUREN
+════════════════════════════════════════════════ -->
+<section id="about">
+    <div class="section-inner">
+        <div class="about-grid">
+            <div class="about-photo-wrap fade-in">
+                <div class="photo-placeholder">
+                    <i class="fas fa-crown"></i>
+                    <p>Lauren<br>Carlsen</p>
+                    <div class="photo-badge">
+                        <div class="big-num">3,000+</div>
+                        <div class="small-text">Items Donated</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-content fade-in">
+                <div class="section-label">Meet the Founder</div>
+                <h2 class="section-title">Lauren Carlsen</h2>
+                <p>My name is Lauren Carlsen. I am a 16-year-old pageant queen, dedicated to serving my Texas community. I have a passion for this movement because I have seen friends and family in a time of their life where basic necessities like clothes were not available.</p>
+                <p>Clean Closet Club works to restore dignity and peace on the giving <em>and</em> receiving end. I started this journey three years ago with a simple belief: that everyone deserves to feel cared for, confident, and seen — no matter what season of life they're walking through.</p>
+                <p>Clothes that can't be repurposed are recycled into thread, rope, and even rubber padding on playgrounds — because nothing goes to waste when there's a purpose behind it.</p>
+                <div class="about-tags">
+                    <span class="tag">🏆 Pageant Queen</span>
+                    <span class="tag">❤️ Community Servant</span>
+                    <span class="tag">🌟 Texas Native</span>
+                    <span class="tag">♻️ Sustainability Advocate</span>
+                    <span class="tag">💜 3+ Years of Service</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════════ -->
+<section id="testimonials">
+    <div class="section-inner">
+        <div class="text-center">
+            <div class="section-label">Testimonials</div>
+            <h2 class="section-title">Words from Our Community</h2>
+            <p class="section-subtitle">Real stories from the hearts that Clean Closet Club has touched — donors, recipients, and partners alike.</p>
+        </div>
+
+        <div class="testimonial-grid">
+            <div class="testimonial-card fade-in">
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">I had bags of clothes sitting in my garage for months and could never find the time to donate them. Lauren came right to my door, and knowing those clothes went to someone who truly needed them — it made my whole week. The process was seamless and so meaningful.</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background: linear-gradient(135deg,#7B4FA6,#9B6CC8);">S</div>
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <div class="t-name">Sarah M.</div>
+                        <div class="t-role">Donor · Houston, TX</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">When I received my purple gift bag, I cried. I was going through one of the hardest seasons of my life and expected something ordinary — instead, it felt like someone had actually gone shopping just for me. That gift bag changed how I saw myself that day.</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background: linear-gradient(135deg,#C2185B,#E91E63);">M</div>
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <div class="t-name">Maria R.</div>
+                        <div class="t-role">Recipient · Katy, TX</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">As a partner charity, we've worked with many organizations — but Clean Closet Club is truly special. Lauren's dedication, attention to detail, and genuine compassion for our clients is evident in everything she does. We are deeply grateful for this partnership.</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background: linear-gradient(135deg,#1565C0,#1976D2);">P</div>
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <div class="t-name">Pastor James T.</div>
+                        <div class="t-role">Clothed by Faith</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════════ -->
+<section id="contact">
+    <div class="section-inner">
+        <div class="text-center">
+            <div class="section-label">Get in Touch</div>
+            <h2 class="section-title">Ready to Make a Difference?</h2>
+            <p class="section-subtitle">Whether you're donating, in need, or want to partner with us — we'd love to hear from you.</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info fade-in">
+                <h3>Let's Connect</h3>
+                <p>Have questions, want to schedule a pickup, or simply want to learn more? Reach out — we're here and happy to help.</p>
+                <div class="contact-details">
+                    <div class="cdetail">
+                        <div class="cdetail-icon"><i class="fas fa-phone"></i></div>
+                        <div class="cdetail-text">
+                            <h4>Phone</h4>
+                            <a href="tel:2819109456">(281) 910-9456</a>
+                        </div>
+                    </div>
+                    <div class="cdetail">
+                        <div class="cdetail-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="cdetail-text">
+                            <h4>Email</h4>
+                            <!-- Update with your actual email address -->
+                            <a href="mailto:hello@cleanclosetclub.com">hello@cleanclosetclub.com</a>
+                        </div>
+                    </div>
+                    <div class="cdetail">
+                        <div class="cdetail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="cdetail-text">
+                            <h4>Address / Service Area</h4>
+                            <!-- Update with your actual address or service area -->
+                            <p>Greater Houston, Texas Area</p>
+                        </div>
+                    </div>
+                    <div class="cdetail">
+                        <div class="cdetail-icon"><i class="fas fa-clock"></i></div>
+                        <div class="cdetail-text">
+                            <h4>Response Time</h4>
+                            <p>Within 24–48 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form fade-in">
+                <h3>Send a Message</h3>
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fname">First Name *</label>
+                            <input type="text" id="fname" placeholder="Jane" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname">Last Name *</label>
+                            <input type="text" id="lname" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="jane@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="(281) 555-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address <span style="font-weight:400;color:var(--text-gray)">(for pickup requests)</span></label>
+                        <input type="text" id="address" placeholder="123 Main St, Houston, TX 77001">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">I am a…</label>
+                        <select id="role">
+                            <option value="">Select one</option>
+                            <option value="donor">Donor — I'd like to give clothes</option>
+                            <option value="recipient">Recipient — I need clothing</option>
+                            <option value="volunteer">Volunteer — I'd like to help</option>
+                            <option value="partner">Organization / Partner</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Tell us how we can help…"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="logo-icon"><i class="fas fa-shirt"></i></div>
+                    <div class="footer-logo-text">
+                        Clean Closet Club
+                        <span>Dignity Through Giving</span>
+                    </div>
+                </div>
+                <p>Turning gently used clothing into renewed confidence for people in need across Texas — wrapped with care, delivered with dignity.</p>
+                <div class="footer-socials">
+                    <!-- Update hrefs with your actual social media profile URLs -->
+                    <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="Facebook" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="TikTok" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="Twitter / X" aria-label="Twitter">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#mission">Our Mission</a></li>
+                    <li><a href="#process">How It Works</a></li>
+                    <li><a href="#difference">Why Us</a></li>
+                    <li><a href="#about">About Lauren</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="fcontact">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:2819109456">(281) 910-9456</a>
+                </div>
+                <!-- Update with your actual email address -->
+                <div class="fcontact">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:hello@cleanclosetclub.com">hello@cleanclosetclub.com</a>
+                </div>
+                <!-- Update with your actual service area or address -->
+                <div class="fcontact">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Greater Houston, TX</span>
+                </div>
+                <div style="margin-top:20px;">
+                    <a href="#contact" class="btn-primary" style="font-size:.82rem;padding:10px 20px;">
+                        <i class="fas fa-gift"></i> Schedule Pickup
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="footer-bottom">
+            <p>© 2025 Clean Closet Club. All rights reserved. Proudly serving Texas communities.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').style.boxShadow =
+            window.scrollY > 40 ? '0 4px 20px rgba(123,79,166,.14)' : 'none';
+    });
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                // Stagger siblings within the same parent
+                const siblings = [...entry.target.parentElement.querySelectorAll('.fade-in')];
+                const idx = siblings.indexOf(entry.target);
+                setTimeout(() => entry.target.classList.add('visible'), idx * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Contact form submission
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+        btn.style.background = 'linear-gradient(135deg,#2E7D32,#43A047)';
+        btn.disabled = true;
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+            btn.style.background = '';
+            btn.disabled = false;
+            document.getElementById('contactForm').reset();
+        }, 3500);
+    }
+</script>
+
+</body>
+</html>

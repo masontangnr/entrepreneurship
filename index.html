@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Westwood Landscapes | League City, TX</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #D4AF37;
+            --gold-bright: #FFD700;
+            --gold-dark: #B8860B;
+            --green-dark: #0d2818;
+            --green-mid: #1a4a2a;
+            --green-light: #2d7a3a;
+            --black: #0a0a0a;
+            --black-mid: #111111;
+            --black-soft: #161616;
+            --text: #f0f0f0;
+            --text-muted: #a0b8a0;
+            --neon: 0 0 8px #FFD700, 0 0 20px #D4AF37, 0 0 40px rgba(212,175,55,0.4);
+            --neon-sm: 0 0 5px #FFD700, 0 0 12px rgba(212,175,55,0.5);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: var(--black);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); box-shadow: var(--neon-sm); }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            background: rgba(8, 8, 8, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(184,134,11,0.6);
+            padding: 0 5%;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: box-shadow 0.3s;
+        }
+
+        .nav-brand { display: flex; flex-direction: column; line-height: 1.2; }
+
+        .nav-logo {
+            font-family: 'Palatino Linotype', Palatino, serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(212,175,55,0.45);
+            transition: text-shadow 0.3s;
+            text-decoration: none;
+        }
+        .nav-logo:hover { text-shadow: var(--neon); }
+
+        .nav-owner {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.82rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 9px 22px;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            text-shadow: var(--neon-sm);
+            box-shadow: 0 0 12px rgba(212,175,55,0.2), inset 0 0 10px rgba(212,175,55,0.04);
+        }
+        .nav-links .nav-cta {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: var(--black) !important;
+            font-weight: bold;
+            border: none;
+        }
+        .nav-links .nav-cta:hover {
+            box-shadow: var(--neon);
+            transform: translateY(-1px);
+            background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+        }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+        .hamburger span { display: block; width: 25px; height: 2px; background: var(--gold); transition: all 0.3s; }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            background:
+                linear-gradient(135deg, rgba(8,8,8,0.88) 0%, rgba(13,40,24,0.92) 50%, rgba(8,8,8,0.88) 100%),
+                url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=80') center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 5% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, rgba(212,175,55,0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-sparkles {
+            position: absolute; inset: 0; pointer-events: none;
+            background:
+                radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,215,0,0.5) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 85% 15%, rgba(255,215,0,0.35) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 45% 75%, rgba(255,215,0,0.4) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 70% 55%, rgba(255,215,0,0.3) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 25% 85%, rgba(255,215,0,0.35) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 90% 70%, rgba(255,215,0,0.25) 0%, transparent 100%);
+            animation: sparkle 6s ease-in-out infinite alternate;
+        }
+        @keyframes sparkle {
+            from { opacity: 0.4; transform: scale(1); }
+            to   { opacity: 1;   transform: scale(1.03); }
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+        .hero-pill {
+            display: inline-block;
+            border: 1px solid var(--gold-dark);
+            color: var(--gold);
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            padding: 9px 26px;
+            margin-bottom: 32px;
+            background: rgba(212,175,55,0.05);
+        }
+
+        .hero-title {
+            font-family: 'Palatino Linotype', Palatino, serif;
+            font-size: clamp(3rem, 8.5vw, 6.5rem);
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 5px;
+            line-height: 1.08;
+            margin-bottom: 22px;
+            animation: titlePulse 4s ease-in-out infinite alternate;
+        }
+        @keyframes titlePulse {
+            from { text-shadow: 0 0 25px rgba(212,175,55,0.35), 0 0 50px rgba(212,175,55,0.15); }
+            to   { text-shadow: 0 0 45px rgba(212,175,55,0.65), 0 0 90px rgba(212,175,55,0.3), 0 0 140px rgba(212,175,55,0.1); }
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .hero-sub {
+            font-size: 0.8rem;
+            color: #666;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            margin-bottom: 52px;
+        }
+
+        .hero-btns { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            background-size: 200% auto;
+            color: var(--black);
+            padding: 16px 44px;
+            border: none;
+            font-size: 0.85rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.35s;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+        .btn-gold:hover {
+            background-position: right center;
+            box-shadow: var(--neon);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            padding: 15px 44px;
+            border: 1px solid var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.35s;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+        .btn-outline:hover {
+            background: rgba(212,175,55,0.08);
+            box-shadow: 0 0 18px rgba(212,175,55,0.35);
+            text-shadow: var(--neon-sm);
+            transform: translateY(-3px);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 32px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            animation: bobble 2.2s ease-in-out infinite;
+        }
+        .scroll-down span { font-size: 0.65rem; letter-spacing: 3px; color: var(--gold-dark); text-transform: uppercase; }
+        .scroll-arrow { width: 18px; height: 18px; border-right: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold); transform: rotate(45deg); }
+        @keyframes bobble {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(9px); }
+        }
+
+        /* ── SECTION BASE ── */
+        section { padding: 100px 5%; }
+
+        .sec-hdr { text-align: center; margin-bottom: 70px; }
+        .sec-label {
+            display: inline-block;
+            color: var(--gold);
+            font-size: 0.72rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--gold-dark);
+            padding-bottom: 8px;
+        }
+        .sec-title {
+            font-family: 'Palatino Linotype', Palatino, serif;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            color: var(--text);
+            letter-spacing: 2px;
+        }
+        .sec-title span { color: var(--gold); }
+        .sec-line {
+            width: 80px; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 18px auto 0;
+        }
+
+        /* ── SERVICES ── */
+        #services {
+            background: var(--black-soft);
+            position: relative;
+        }
+        #services::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .svc-card {
+            background: linear-gradient(140deg, rgba(13,40,24,0.55), rgba(8,8,8,0.92));
+            border: 1px solid rgba(212,175,55,0.18);
+            padding: 52px 36px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .svc-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .svc-card::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.07) 0%, transparent 70%);
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .svc-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 24px 48px rgba(0,0,0,0.45), 0 0 30px rgba(212,175,55,0.12); }
+        .svc-card:hover::before, .svc-card:hover::after { opacity: 1; }
+
+        .svc-icon { font-size: 3rem; margin-bottom: 24px; display: block; transition: all 0.35s; }
+        .svc-card:hover .svc-icon { transform: scale(1.12); filter: drop-shadow(0 0 12px rgba(212,175,55,0.9)); }
+
+        .svc-name {
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+            transition: text-shadow 0.3s;
+        }
+        .svc-card:hover .svc-name { text-shadow: var(--neon-sm); }
+
+        .svc-desc { color: var(--text-muted); line-height: 1.85; font-size: 0.95rem; }
+
+        .svc-tag {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 5px 16px;
+            border: 1px solid rgba(212,175,55,0.28);
+            color: var(--gold-dark);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .svc-card:hover .svc-tag { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 10px rgba(212,175,55,0.25); }
+
+        /* ── WHY US ── */
+        .why {
+            background: var(--black);
+            position: relative;
+        }
+        .why::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+        }
+
+        .feats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feat {
+            text-align: center;
+            padding: 42px 24px;
+            border: 1px solid rgba(212,175,55,0.1);
+            background: rgba(13,40,24,0.18);
+            transition: all 0.35s;
+        }
+        .feat:hover {
+            border-color: var(--gold);
+            background: rgba(13,40,24,0.48);
+            box-shadow: 0 0 22px rgba(212,175,55,0.1);
+            transform: translateY(-6px);
+        }
+        .feat-icon { font-size: 2.6rem; margin-bottom: 14px; display: block; }
+        .feat-title {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            transition: text-shadow 0.3s;
+        }
+        .feat:hover .feat-title { text-shadow: var(--neon-sm); }
+        .feat-desc { color: #777; font-size: 0.88rem; line-height: 1.75; }
+
+        /* ── ABOUT ── */
+        #about {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--black-soft) 100%);
+            position: relative;
+        }
+        #about::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+        }
+
+        .about-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-frame-outer { position: relative; }
+        .about-frame {
+            width: 100%; padding-bottom: 115%;
+            background: linear-gradient(135deg, rgba(13,40,24,0.8), rgba(45,122,58,0.25));
+            border: 1.5px solid rgba(212,175,55,0.28);
+            position: relative; overflow: hidden;
+        }
+        .about-frame::before {
+            content: '🌿';
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 9rem; opacity: 0.18;
+        }
+        .about-frame::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%);
+        }
+        .corner {
+            position: absolute; width: 28px; height: 28px;
+            border-color: var(--gold); border-style: solid;
+        }
+        .tl { top: -8px; left: -8px; border-width: 2px 0 0 2px; }
+        .tr { top: -8px; right: -8px; border-width: 2px 2px 0 0; }
+        .bl { bottom: -8px; left: -8px; border-width: 0 0 2px 2px; }
+        .br { bottom: -8px; right: -8px; border-width: 0 2px 2px 0; }
+
+        .about-txt .sec-label, .about-txt .sec-title { text-align: left; }
+        .about-txt .sec-line { margin: 14px 0 28px 0; }
+
+        .about-quote {
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1.25rem;
+            color: var(--gold);
+            font-style: italic;
+            border-left: 3px solid var(--gold);
+            padding: 14px 0 14px 24px;
+            margin-bottom: 24px;
+            background: rgba(212,175,55,0.03);
+        }
+
+        .about-p { color: var(--text-muted); line-height: 1.9; margin-bottom: 18px; font-size: 0.97rem; }
+
+        .about-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 18px; margin-top: 32px; padding-top: 32px;
+            border-top: 1px solid rgba(212,175,55,0.18);
+        }
+        .stat { text-align: center; }
+        .stat-val {
+            font-family: 'Palatino Linotype', serif;
+            font-size: 2.2rem; color: var(--gold); font-weight: bold; display: block;
+        }
+        .stat-lbl { font-size: 0.7rem; color: #555; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* ── PRICING ── */
+        .pricing {
+            background: var(--black-soft);
+            position: relative;
+        }
+        .pricing::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+        }
+
+        .pricing-note {
+            text-align: center; max-width: 580px; margin: -40px auto 60px;
+            color: #777; line-height: 1.85; font-size: 0.95rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            max-width: 1000px; margin: 0 auto;
+        }
+
+        .price-card {
+            border: 1px solid rgba(212,175,55,0.15);
+            background: linear-gradient(160deg, rgba(13,40,24,0.45), rgba(8,8,8,0.92));
+            padding: 46px 30px;
+            text-align: center;
+            transition: all 0.35s;
+            position: relative; overflow: hidden;
+        }
+        .price-card.featured {
+            border-color: var(--gold);
+            background: linear-gradient(160deg, rgba(13,40,24,0.78), rgba(45,90,40,0.35));
+        }
+        .price-card.featured::before {
+            content: 'BEST VALUE';
+            position: absolute; top: 16px; right: -24px;
+            background: var(--gold); color: var(--black);
+            font-size: 0.62rem; letter-spacing: 2px; padding: 5px 38px;
+            transform: rotate(35deg); font-weight: bold;
+        }
+        .price-card:hover {
+            transform: translateY(-9px);
+            border-color: var(--gold);
+            box-shadow: 0 22px 44px rgba(0,0,0,0.4), 0 0 22px rgba(212,175,55,0.1);
+        }
+
+        .price-cat { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+        .price-name {
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1.55rem; color: var(--text); margin-bottom: 18px;
+        }
+        .price-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 18px 0; }
+        .price-desc { color: #777; font-size: 0.88rem; line-height: 1.75; margin-bottom: 18px; }
+        .price-val { color: var(--gold); font-size: 2.4rem; font-weight: bold; }
+        .price-val sub { font-size: 0.95rem; font-weight: normal; }
+
+        /* ── CONTACT ── */
+        #contact {
+            background: var(--black);
+            position: relative;
+        }
+        #contact::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+        }
+
+        .contact-wrap { max-width: 860px; margin: 0 auto; }
+
+        .cform {
+            background: linear-gradient(135deg, rgba(13,40,24,0.38), rgba(8,8,8,0.85));
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 60px 58px;
+            position: relative;
+        }
+        .cform::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .fgrp { display: flex; flex-direction: column; gap: 7px; }
+        .fgrp.full { grid-column: 1 / -1; }
+
+        .flabel {
+            font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--gold-dark); transition: color 0.3s;
+        }
+        .fgrp:focus-within .flabel { color: var(--gold); }
+
+        .finput, .fselect, .ftarea {
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(212,175,55,0.2);
+            color: var(--text);
+            padding: 13px 17px;
+            font-size: 0.93rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .finput:focus, .fselect:focus, .ftarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 16px rgba(212,175,55,0.14), inset 0 0 8px rgba(212,175,55,0.03);
+            background: rgba(212,175,55,0.03);
+        }
+        .finput::placeholder, .ftarea::placeholder { color: #3a3a3a; }
+        .finput[type="date"] { color-scheme: dark; }
+        .fselect option { background: #111; color: var(--text); }
+        .ftarea { min-height: 115px; resize: vertical; }
+
+        .checks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+            gap: 10px; margin-top: 6px;
+        }
+
+        .check-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 11px 14px;
+            border: 1px solid rgba(212,175,55,0.14);
+            cursor: pointer; transition: all 0.3s;
+        }
+        .check-item:hover { border-color: var(--gold); background: rgba(212,175,55,0.05); }
+
+        .check-item input[type="checkbox"] {
+            appearance: none; -webkit-appearance: none;
+            width: 17px; height: 17px;
+            border: 1px solid var(--gold-dark);
+            cursor: pointer; position: relative; flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .check-item input[type="checkbox"]:checked { background: var(--gold); border-color: var(--gold); }
+        .check-item input[type="checkbox"]:checked::after {
+            content: '✓'; position: absolute; top: -1px; left: 2px;
+            color: var(--black); font-size: 13px; font-weight: bold;
+        }
+
+        .check-lbl { font-size: 0.85rem; color: var(--text-muted); cursor: pointer; }
+        .check-item:hover .check-lbl { color: var(--gold); }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            background-size: 200% auto;
+            color: var(--black);
+            padding: 19px 40px;
+            border: none;
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.35s;
+            font-family: inherit;
+        }
+        .submit-btn:hover {
+            background-position: right center;
+            box-shadow: var(--neon);
+            transform: translateY(-2px);
+        }
+        .submit-btn:active { transform: translateY(0); }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--black-mid);
+            border-top: 1px solid rgba(212,175,55,0.18);
+            padding: 72px 5% 28px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 56px;
+            max-width: 1100px; margin: 0 auto 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Palatino Linotype', serif;
+            font-size: 1.7rem; font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(212,175,55,0.4);
+            display: block; margin-bottom: 14px;
+            transition: text-shadow 0.3s; cursor: default;
+        }
+        .footer-logo:hover { text-shadow: var(--neon); }
+
+        .footer-tagline { color: #555; font-size: 0.88rem; line-height: 1.85; margin-bottom: 20px; }
+
+        .footer-area {
+            display: inline-flex; align-items: center; gap: 7px;
+            color: var(--gold-dark); font-size: 0.78rem; letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 8px 15px;
+        }
+
+        .fcol-title {
+            color: var(--gold); font-size: 0.78rem; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 20px;
+            border-bottom: 1px solid rgba(212,175,55,0.18); padding-bottom: 11px;
+        }
+
+        .flinks { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .flinks li {
+            color: #555; font-size: 0.88rem; cursor: pointer; transition: color 0.3s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .flinks li::before {
+            content: '▸'; color: var(--gold-dark); font-size: 0.68rem;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .flinks li:hover { color: var(--gold); }
+        .flinks li:hover::before { color: var(--gold); text-shadow: var(--neon-sm); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(212,175,55,0.1);
+            padding-top: 24px;
+            display: flex; justify-content: space-between; align-items: center;
+            max-width: 1100px; margin: 0 auto;
+            flex-wrap: wrap; gap: 12px;
+        }
+        .footer-copy { color: #3a3a3a; font-size: 0.8rem; }
+        .footer-copy span { color: var(--gold-dark); }
+        .footer-zone { color: #3a3a3a; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; }
+        .footer-zone em { color: var(--green-light); font-style: normal; }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed; bottom: 28px; right: 28px;
+            background: linear-gradient(135deg, var(--green-dark), var(--black-soft));
+            border: 1px solid var(--gold);
+            padding: 20px 28px;
+            z-index: 9999;
+            transform: translateX(150%);
+            transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 30px rgba(212,175,55,0.18);
+            min-width: 240px;
+        }
+        .toast.show { transform: translateX(0); }
+        .toast-title { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+        .toast-msg { color: var(--text-muted); font-size: 0.83rem; }
+
+        /* ── FADE-IN SCROLL ANIMATIONS ── */
+        .fi { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .fi.on { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none; position: absolute;
+                top: 72px; left: 0; right: 0;
+                background: rgba(8,8,8,0.98);
+                flex-direction: column;
+                padding: 28px; gap: 12px;
+                border-bottom: 1px solid var(--gold-dark);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { text-align: center; }
+            .about-wrap { grid-template-columns: 1fr; }
+            .about-frame-outer { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+            .frow { grid-template-columns: 1fr; }
+            .cform { padding: 38px 22px; }
+            .hero-btns { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav id="navbar">
+    <div class="nav-brand">
+        <a href="#" class="nav-logo">Westwood Landscapes</a>
+        <span class="nav-owner">Abdullah Jamawe</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+    <div class="hero-sparkles"></div>
+    <div class="hero-content">
+        <div class="hero-pill">Westwood &nbsp;·&nbsp; League City, TX 77573</div>
+        <h1 class="hero-title">Westwood<br>Landscapes</h1>
+        <p class="hero-tagline">"Helping the community improve life, one garden at a time."</p>
+        <p class="hero-sub">Neighborhood-Friendly &nbsp;·&nbsp; Local &nbsp;·&nbsp; Affordable</p>
+        <div class="hero-btns">
+            <a href="#contact" class="btn-gold">Get a Free Quote</a>
+            <a href="#services" class="btn-outline">Our Services</a>
+        </div>
+    </div>
+    <div class="scroll-down">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<!-- ══════════ SERVICES ══════════ -->
+<section id="services">
+    <div class="sec-hdr fi">
+        <span class="sec-label">What We Offer</span>
+        <h2 class="sec-title">Our <span>Services</span></h2>
+        <div class="sec-line"></div>
+    </div>
+    <div class="services-grid">
+        <div class="svc-card fi">
+            <span class="svc-icon">🌿</span>
+            <h3 class="svc-name">Weed Pulling</h3>
+            <p class="svc-desc">We carefully hand-pull every unwanted weed from your garden beds, lawn edges, and walkways — leaving your yard spotless, healthy, and looking its very best.</p>
+            <span class="svc-tag">Manual Removal</span>
+        </div>
+        <div class="svc-card fi">
+            <span class="svc-icon">🛡️</span>
+            <h3 class="svc-name">Weed Prevention</h3>
+            <p class="svc-desc">We apply safe, effective barriers and preventative treatments to stop weeds before they start — protecting your garden and keeping it pristine season after season.</p>
+            <span class="svc-tag">Long-Term Protection</span>
+        </div>
+        <div class="svc-card fi">
+            <span class="svc-icon">💧</span>
+            <h3 class="svc-name">Garden Watering</h3>
+            <p class="svc-desc">Regular, scheduled watering ensures your plants thrive. Perfect for busy professionals, seniors, and anyone recovering from injury who still wants a beautiful garden.</p>
+            <span class="svc-tag">Scheduled Care</span>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ WHY US ══════════ -->
+<section class="why">
+    <div class="sec-hdr fi">
+        <span class="sec-label">Why Choose Us</span>
+        <h2 class="sec-title">The <span>Westwood</span> Difference</h2>
+        <div class="sec-line"></div>
+    </div>
+    <div class="feats-grid">
+        <div class="feat fi">
+            <span class="feat-icon">🏘️</span>
+            <h4 class="feat-title">Neighborhood-Friendly</h4>
+            <p class="feat-desc">We're your neighbors. We treat every garden with the same care we'd give our own.</p>
+        </div>
+        <div class="feat fi">
+            <span class="feat-icon">💰</span>
+            <h4 class="feat-title">Affordable Pricing</h4>
+            <p class="feat-desc">Premium care at community-friendly prices. Quoted per garden size so you only pay for what you need.</p>
+        </div>
+        <div class="feat fi">
+            <span class="feat-icon">🤝</span>
+            <h4 class="feat-title">Community-First</h4>
+            <p class="feat-desc">Proudly serving Westwood locals only. We're invested in making our neighborhood beautiful together.</p>
+        </div>
+        <div class="feat fi">
+            <span class="feat-icon">⭐</span>
+            <h4 class="feat-title">Reliable &amp; Punctual</h4>
+            <p class="feat-desc">We show up on time and deliver consistently — every single visit, no excuses.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+    <div class="about-wrap">
+        <div class="about-frame-outer fi">
+            <div class="about-frame"></div>
+            <div class="corner tl"></div>
+            <div class="corner tr"></div>
+            <div class="corner bl"></div>
+            <div class="corner br"></div>
+        </div>
+        <div class="about-txt fi">
+            <span class="sec-label">About the Founder</span>
+            <h2 class="sec-title">Meet <span>Abdullah</span></h2>
+            <div class="sec-line"></div>
+            <blockquote class="about-quote">
+                "Thank you for choosing Westwood Landscapes."
+            </blockquote>
+            <p class="about-p">
+                My name is <strong style="color:var(--gold)">Abdullah Jamawe</strong> and I am a high school student with a genuine passion for making our community a cleaner, greener, more beautiful place to live.
+            </p>
+            <p class="about-p">
+                I started Westwood Landscapes because I noticed neighbors with demanding schedules, elderly residents, and people recovering from injuries struggling to keep up with their gardens. I wanted to make a real difference — and make it affordable for everyone.
+            </p>
+            <p class="about-p">
+                My mission is simple: <em style="color:var(--text-muted)">improve the community one garden at a time.</em> I am proud to be a neighbor-first landscaper who genuinely cares about the people I serve right here in Westwood.
+            </p>
+            <div class="about-stats">
+                <div class="stat">
+                    <span class="stat-val">3</span>
+                    <span class="stat-lbl">Services</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-val">1</span>
+                    <span class="stat-lbl">Community</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-val">∞</span>
+                    <span class="stat-lbl">Dedication</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ PRICING ══════════ -->
+<section class="pricing">
+    <div class="sec-hdr fi">
+        <span class="sec-label">Investment</span>
+        <h2 class="sec-title">Our <span>Pricing</span></h2>
+        <div class="sec-line"></div>
+    </div>
+    <p class="pricing-note fi">
+        Every garden is unique, so every quote is custom. Pricing is based on garden size and services selected. Reach out for a free, no-obligation consultation — we will work out a plan that fits your budget.
+    </p>
+    <div class="pricing-grid">
+        <div class="price-card fi">
+            <p class="price-cat">Service 01</p>
+            <h3 class="price-name">Weed Pulling</h3>
+            <div class="price-divider"></div>
+            <p class="price-desc">Complete hand-removal of all weeds from garden beds, lawn borders, and walkways.</p>
+            <p class="price-val">Custom <sub>/ quote</sub></p>
+        </div>
+        <div class="price-card featured fi">
+            <p class="price-cat">Service 02</p>
+            <h3 class="price-name">Full Garden Care</h3>
+            <div class="price-divider"></div>
+            <p class="price-desc">Combined weed pulling + prevention + regular watering for complete, worry-free garden maintenance.</p>
+            <p class="price-val">Custom <sub>/ quote</sub></p>
+        </div>
+        <div class="price-card fi">
+            <p class="price-cat">Service 03</p>
+            <h3 class="price-name">Weed Prevention</h3>
+            <div class="price-divider"></div>
+            <p class="price-desc">Preventative barriers and treatment to keep weeds from coming back all season long.</p>
+            <p class="price-val">Custom <sub>/ quote</sub></p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+    <div class="sec-hdr fi">
+        <span class="sec-label">Get In Touch</span>
+        <h2 class="sec-title">Contact <span>Us</span></h2>
+        <div class="sec-line"></div>
+    </div>
+    <div class="contact-wrap fi">
+        <form class="cform" id="contactForm" onsubmit="handleForm(event)">
+
+            <div class="frow">
+                <div class="fgrp">
+                    <label class="flabel" for="fname">Full Name</label>
+                    <input class="finput" type="text" id="fname" placeholder="Your full name" required>
+                </div>
+                <div class="fgrp">
+                    <label class="flabel" for="fphone">Phone Number</label>
+                    <input class="finput" type="tel" id="fphone" placeholder="(555) 000-0000" required>
+                </div>
+            </div>
+
+            <div class="frow">
+                <div class="fgrp">
+                    <label class="flabel" for="femail">Email Address</label>
+                    <input class="finput" type="email" id="femail" placeholder="your@email.com" required>
+                </div>
+                <div class="fgrp">
+                    <label class="flabel" for="fdate">Preferred Date of Service</label>
+                    <input class="finput" type="date" id="fdate" required>
+                </div>
+            </div>
+
+            <div class="frow">
+                <div class="fgrp full">
+                    <label class="flabel" for="faddress">Home Address</label>
+                    <input class="finput" type="text" id="faddress" placeholder="Your Westwood address" required>
+                </div>
+            </div>
+
+            <div class="frow">
+                <div class="fgrp full">
+                    <span class="flabel">Services Needed</span>
+                    <div class="checks-grid">
+                        <label class="check-item">
+                            <input type="checkbox" name="services" value="weed-pulling">
+                            <span class="check-lbl">🌿 Weed Pulling</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" name="services" value="weed-prevention">
+                            <span class="check-lbl">🛡️ Weed Prevention</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" name="services" value="watering">
+                            <span class="check-lbl">💧 Garden Watering</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="frow">
+                <div class="fgrp full">
+                    <label class="flabel" for="fhelp">How Can We Help?</label>
+                    <textarea class="ftarea" id="fhelp" placeholder="Tell us about your garden — size, current condition, areas of concern, anything else we should know before your first visit..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <span class="footer-logo">Westwood Landscapes</span>
+            <p class="footer-tagline">Helping the community improve life, one garden at a time. Proudly rooted in the Westwood neighborhood of League City, Texas.</p>
+            <div class="footer-area">📍 Westwood Only &nbsp;·&nbsp; League City, TX 77573</div>
+        </div>
+        <div>
+            <h4 class="fcol-title">Services</h4>
+            <ul class="flinks">
+                <li>Weed Pulling</li>
+                <li>Weed Prevention</li>
+                <li>Garden Watering</li>
+                <li>Full Garden Care</li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="fcol-title">Navigate</h4>
+            <ul class="flinks">
+                <li onclick="goto('services')">Our Services</li>
+                <li onclick="goto('about')">About Abdullah</li>
+                <li onclick="goto('contact')">Get a Free Quote</li>
+                <li style="cursor:default">Service Area: Westwood</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p class="footer-copy">© 2025 <span>Westwood Landscapes</span> &nbsp;·&nbsp; Founded by Abdullah Jamawe</p>
+        <p class="footer-zone">Serving: <em>Westwood, League City TX 77573 Only</em></p>
+    </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+    <div class="toast-title">Message Sent!</div>
+    <div class="toast-msg">We'll be in touch soon. Thank you!</div>
+</div>
+
+<script>
+    /* Mobile nav toggle */
+    function toggleNav() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+    document.querySelectorAll('.nav-links a').forEach(a =>
+        a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'))
+    );
+
+    /* Scroll to section */
+    function goto(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* Navbar shadow on scroll */
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 60) {
+            nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.6)';
+            nav.style.borderBottomColor = 'rgba(212,175,55,0.55)';
+        } else {
+            nav.style.boxShadow = 'none';
+            nav.style.borderBottomColor = 'rgba(184,134,11,0.6)';
+        }
+    });
+
+    /* Fade-in on scroll */
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+    /* Form submit */
+    function handleForm(e) {
+        e.preventDefault();
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4200);
+        e.target.reset();
+    }
+</script>
+</body>
+</html>

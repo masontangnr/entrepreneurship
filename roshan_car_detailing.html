@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roshan's Car Detailing</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #122040;
+      --navy-light: #1a2f5a;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --white: #ffffff;
+      --off-white: #f5f5f0;
+      --gray: #8a9ab5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10, 22, 40, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 70px;
+    }
+
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--gold);
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .nav-brand span { color: var(--white); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-phone {
+      color: var(--gold-light);
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .nav-phone a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav-phone a:hover { color: var(--white); }
+
+    /* Dropdown */
+    .dropdown { position: relative; }
+
+    .dropdown-toggle {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 8px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dropdown-toggle:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .dropdown-toggle svg {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s;
+    }
+
+    .dropdown:hover .dropdown-toggle svg { transform: rotate(180deg); }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 6px;
+      min-width: 200px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    }
+
+    .dropdown:hover .dropdown-menu { display: block; }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 13px 20px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .dropdown-menu a:last-child { border-bottom: none; }
+    .dropdown-menu a:hover { background: var(--gold); color: var(--navy); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1800&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.35);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,22,40,0.3) 0%, rgba(10,22,40,0.75) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      padding: 0 24px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      border: 1px solid var(--gold);
+      padding: 5px 18px;
+      border-radius: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .hero-availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 10px 22px;
+      border-radius: 30px;
+      color: var(--gold-light);
+      font-size: 0.95rem;
+      margin-bottom: 36px;
+    }
+
+    .dot {
+      width: 8px; height: 8px;
+      background: #4caf50;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 38px;
+      border-radius: 4px;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s, transform 0.15s, box-shadow 0.25s;
+      font-family: inherit;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: bold;
+      margin-right: 14px;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 90px 24px; }
+
+    .section-label {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--gray);
+      max-width: 580px;
+      margin: 0 auto 58px;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .section-divider {
+      width: 56px;
+      height: 3px;
+      background: var(--gold);
+      margin: 0 auto 16px;
+    }
+
+    /* ── WHY US ── */
+    #about { background: var(--navy-mid); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      filter: brightness(0.9);
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 8px;
+      padding: 20px 22px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+
+    .about-badge .big { font-size: 2rem; display: block; line-height: 1; }
+    .about-badge .small { font-size: 0.75rem; letter-spacing: 1px; }
+
+    .about-text h2 {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      margin-bottom: 18px;
+      color: var(--white);
+    }
+
+    .about-text h2 em { color: var(--gold); font-style: normal; }
+
+    .about-text p {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 22px;
+      font-size: 1rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+      font-size: 0.97rem;
+    }
+
+    .feature-list li::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 20px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%230a1628'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+      background-size: cover;
+    }
+
+    /* ── SERVICES PHOTO STRIP ── */
+    #services { background: var(--navy); }
+
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto 60px;
+    }
+
+    .photo-strip img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      filter: brightness(0.8);
+      transition: filter 0.3s, transform 0.3s;
+      display: block;
+    }
+
+    .photo-strip img:hover {
+      filter: brightness(1);
+      transform: scale(1.02);
+    }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--navy-mid); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--gold);
+      transform: scale(1.04);
+    }
+
+    .pricing-card.featured:hover {
+      transform: scale(1.04) translateY(-6px);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      filter: brightness(0.75);
+    }
+
+    .card-badge {
+      background: var(--gold);
+      color: var(--navy);
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      font-weight: bold;
+      padding: 6px;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 28px 26px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-name {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .card-price {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .card-price span {
+      font-size: 1rem;
+      color: var(--gray);
+      font-weight: normal;
+    }
+
+    .card-desc {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .card-features {
+      list-style: none;
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .card-features li {
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.82);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .card-features li.unavail {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .card-features li.unavail::before {
+      content: '–';
+      color: rgba(255,255,255,0.2);
+    }
+
+    .card-cta {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .card-cta:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .pricing-card.featured .card-cta {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .pricing-card.featured .card-cta:hover {
+      background: var(--gold-light);
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--navy); }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    .testi-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 10px;
+      padding: 30px 26px;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+    }
+
+    .testi-text {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+    }
+
+    .testi-name { font-weight: bold; font-size: 0.95rem; }
+    .testi-loc { font-size: 0.8rem; color: var(--gray); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy-mid); }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    .contact-info p {
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .info-icon {
+      width: 42px; height: 42px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    .info-label { font-size: 0.8rem; color: var(--gray); letter-spacing: 1px; }
+    .info-value { font-size: 0.97rem; color: var(--white); margin-top: 2px; }
+    .info-value a { color: var(--gold); text-decoration: none; }
+    .info-value a:hover { color: var(--gold-light); }
+
+    form {
+      background: var(--navy-light);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      padding: 36px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      color: var(--gray);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 5px;
+      padding: 12px 15px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group select option { background: var(--navy-mid); }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #060f1e;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      padding: 50px 24px 30px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .footer-contact a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--gold); }
+
+    .footer-copy {
+      color: rgba(255,255,255,0.3);
+      font-size: 0.8rem;
+      margin-top: 20px;
+    }
+
+    .btn-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 32px;
+      transition: background 0.2s, color 0.2s;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .btn-top:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-brand { font-size: 1rem; }
+      .about-grid,
+      .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .about-badge { bottom: 10px; right: 10px; }
+      .pricing-grid,
+      .testi-grid { grid-template-columns: 1fr; }
+      .pricing-card.featured { transform: none; }
+      .photo-strip { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      nav { flex-wrap: wrap; height: auto; padding: 14px 16px; gap: 10px; }
+      .nav-right { flex-direction: column; align-items: flex-end; gap: 8px; }
+      .form-row { grid-template-columns: 1fr; }
+      .photo-strip { grid-template-columns: 1fr; }
+      .footer-contact { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav>
+  <div class="nav-brand">Roshan's <span>Car Detailing</span></div>
+  <div class="nav-right">
+    <div class="nav-phone">📞 <a href="tel:+17035550192">(703) 555-0192</a></div>
+    <div class="dropdown">
+      <button class="dropdown-toggle">
+        Menu
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="2 4 6 8 10 4"/>
+        </svg>
+      </button>
+      <div class="dropdown-menu">
+        <a href="#pricing">Pricing Plans</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact Form</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ══════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mobile Car Detailing</div>
+    <h1>Professional Detailing <em>At Your Home</em></h1>
+    <p>
+      We come to you — no driving, no waiting, no hassle. Your car is
+      returned spotless, inside and out, right on your driveway.
+    </p>
+    <div class="hero-availability">
+      <span class="dot"></span>
+      Available Monday – Friday &nbsp;|&nbsp; 1:00 PM – 5:00 PM
+    </div>
+    <br />
+    <a href="#pricing" class="btn btn-primary">View Pricing</a>
+    <a href="#contact" class="btn btn-outline">Book Now</a>
+  </div>
+</section>
+
+<!-- ════════════════════════════ ABOUT / WHY ══════════════════════════ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80"
+        alt="Professional car detailing in progress"
+      />
+      <div class="about-badge">
+        <span class="big">100%</span>
+        <span class="small">Satisfaction<br>Guaranteed</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="section-label">Why Choose Roshan</p>
+      <h2>We Bring the <em>Shine</em> to Your Driveway</h2>
+      <p>
+        Getting your car detailed shouldn't be an inconvenience. That's why
+        Roshan's Car Detailing comes directly to your home — saving you time
+        while delivering a showroom-quality finish every single visit.
+      </p>
+      <p>
+        With careful attention to every surface and a genuine passion for clean
+        vehicles, we treat your car as if it were our own.
+      </p>
+      <ul class="feature-list">
+        <li>Mobile service — we come to you, no drop-off needed</li>
+        <li>Professional-grade products and equipment</li>
+        <li>Transparent flat-rate pricing, no surprise fees</li>
+        <li>Fully insured and detail-oriented service</li>
+        <li>Available Monday through Friday, 1 PM – 5 PM</li>
+      </ul>
+      <a href="#contact" class="btn btn-primary">Schedule a Detail</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ SERVICES PHOTO STRIP ════════════════ -->
+<section id="services" style="padding-bottom: 40px;">
+  <p class="section-label">Our Work</p>
+  <h2 class="section-title">A Finish You Can Be Proud Of</h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    From a quick exterior refresh to a complete interior restoration,
+    every job leaves your vehicle looking its absolute best.
+  </p>
+  <div class="photo-strip">
+    <img
+      src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=700&q=75"
+      alt="Car exterior being washed"
+    />
+    <img
+      src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=700&q=75"
+      alt="Polished luxury car"
+    />
+    <img
+      src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=700&q=75"
+      alt="Car interior detailing"
+    />
+    <img
+      src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=700&q=75"
+      alt="Clean car exterior close-up"
+    />
+    <img
+      src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=700&q=75"
+      alt="Car engine detailing"
+    />
+    <img
+      src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=700&q=75"
+      alt="Detailing finishing touches"
+    />
+  </div>
+</section>
+
+<!-- ════════════════════════════ PRICING ══════════════════════════════ -->
+<section id="pricing">
+  <p class="section-label">Pricing Plans</p>
+  <h2 class="section-title">Simple, Transparent Pricing</h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    Choose the package that fits your needs. Every plan includes
+    professional-grade products and our satisfaction guarantee.
+  </p>
+
+  <div class="pricing-grid">
+
+    <!-- Base -->
+    <div class="pricing-card">
+      <img
+        class="card-img"
+        src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&q=75"
+        alt="Exterior wash"
+      />
+      <div class="card-body">
+        <div class="card-name">Base Wash</div>
+        <div class="card-price">$40 <span>/ visit</span></div>
+        <p class="card-desc">A thorough exterior clean that leaves your car gleaming from bumper to bumper.</p>
+        <ul class="card-features">
+          <li>Full exterior hand wash</li>
+          <li>Wheel & tire cleaning</li>
+          <li>Window cleaning (exterior)</li>
+          <li>Rinse & dry</li>
+          <li class="unavail">Interior vacuuming</li>
+          <li class="unavail">Interior wipe-down</li>
+          <li class="unavail">Engine bay cleaning</li>
+          <li class="unavail">Paint correction</li>
+        </ul>
+        <a href="#contact" class="card-cta">Book Base Wash</a>
+      </div>
+    </div>
+
+    <!-- Premium -->
+    <div class="pricing-card featured">
+      <img
+        class="card-img"
+        src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=75"
+        alt="Premium interior and exterior detail"
+      />
+      <div class="card-badge">Most Popular</div>
+      <div class="card-body">
+        <div class="card-name">Premium Wash</div>
+        <div class="card-price">$80 <span>/ visit</span></div>
+        <p class="card-desc">Complete interior and exterior detailing — the most popular choice for a reason.</p>
+        <ul class="card-features">
+          <li>Full exterior hand wash</li>
+          <li>Wheel & tire cleaning</li>
+          <li>Window cleaning (inside & out)</li>
+          <li>Interior vacuuming</li>
+          <li>Dashboard & console wipe-down</li>
+          <li>Door jamb cleaning</li>
+          <li class="unavail">Engine bay cleaning</li>
+          <li class="unavail">Paint correction</li>
+        </ul>
+        <a href="#contact" class="card-cta">Book Premium Wash</a>
+      </div>
+    </div>
+
+    <!-- Ultimate -->
+    <div class="pricing-card">
+      <img
+        class="card-img"
+        src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=75"
+        alt="Ultimate full detail"
+      />
+      <div class="card-body">
+        <div class="card-name">Ultimate Detail</div>
+        <div class="card-price">Call <span>for quote</span></div>
+        <p class="card-desc">The complete concierge experience — every inch of your vehicle meticulously restored.</p>
+        <ul class="card-features">
+          <li>Everything in Premium</li>
+          <li>Engine bay cleaning</li>
+          <li>Clay bar treatment</li>
+          <li>Paint correction & polish</li>
+          <li>Wax or sealant coat</li>
+          <li>Leather conditioning</li>
+          <li>Odor elimination</li>
+          <li>Full undercarriage rinse</li>
+        </ul>
+        <a href="#contact" class="card-cta">Book Ultimate Detail</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════ TESTIMONIALS ═════════════════════════ -->
+<section id="testimonials">
+  <p class="section-label">What Clients Say</p>
+  <h2 class="section-title">Trusted by Drivers Across the Area</h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    Real results, real satisfaction. Here's what our customers have to say.
+  </p>
+
+  <div class="testi-grid">
+
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">
+        "Roshan showed up exactly on time and my car looked brand new when he
+        was done. I could not believe the difference. Worth every penny of the
+        premium package."
+      </p>
+      <div class="testi-author">
+        <img
+          class="testi-avatar"
+          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=100&q=75"
+          alt="Customer David M."
+        />
+        <div>
+          <div class="testi-name">David M.</div>
+          <div class="testi-loc">Arlington, VA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">
+        "As a busy professional I never have time to get my car washed. Having
+        Roshan come to my home is a game-changer. The results speak for
+        themselves — absolutely immaculate."
+      </p>
+      <div class="testi-author">
+        <img
+          class="testi-avatar"
+          src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=100&q=75"
+          alt="Customer Patricia L."
+        />
+        <div>
+          <div class="testi-name">Patricia L.</div>
+          <div class="testi-loc">Fairfax, VA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">
+        "Did the Ultimate Detail on my pickup. The engine bay looked like it
+        just rolled off the lot. Professional, careful, and a pleasure to
+        deal with. Already booked my next appointment."
+      </p>
+      <div class="testi-author">
+        <img
+          class="testi-avatar"
+          src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100&q=75"
+          alt="Customer Robert K."
+        />
+        <div>
+          <div class="testi-name">Robert K.</div>
+          <div class="testi-loc">McLean, VA</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════ CONTACT ══════════════════════════════ -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Book Your Detail Today</h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    Fill out the form below and Roshan will get back to you within one
+    business day to confirm your appointment.
+  </p>
+
+  <div class="contact-wrap">
+
+    <div class="contact-info">
+      <h3>Contact Information</h3>
+      <p>
+        Ready for a spotless car without leaving home? Reach out and we'll
+        find a time that works for your schedule.
+      </p>
+
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-value"><a href="tel:+17035550192">(703) 555-0192</a></div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-value"><a href="mailto:roshan@roshandetailing.com">roshan@roshandetailing.com</a></div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div>
+          <div class="info-label">Hours</div>
+          <div class="info-value">Monday – Friday, 1:00 PM – 5:00 PM</div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Service Area</div>
+          <div class="info-value">Northern Virginia &amp; Surrounding Areas</div>
+        </div>
+      </div>
+    </div>
+
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" placeholder="John" required />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" placeholder="Smith" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(703) 555-0000" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="service">Desired Service</label>
+        <select id="service" name="service" required>
+          <option value="" disabled selected>Select a package…</option>
+          <option value="base">Base Wash — $40</option>
+          <option value="premium">Premium Wash — $80</option>
+          <option value="ultimate">Ultimate Detail — Call for Quote</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="vehicle">Vehicle (Year, Make, Model)</label>
+        <input type="text" id="vehicle" name="vehicle" placeholder="e.g. 2019 Toyota Camry" />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Additional Notes</label>
+        <textarea id="message" name="message" placeholder="Any special requests or details about your vehicle…"></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Send Booking Request ➜</button>
+    </form>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <a href="#home" class="btn-top">↑ Back to Top</a>
+
+  <div class="footer-logo">Roshan's Car Detailing</div>
+
+  <div class="footer-contact">
+    <a href="tel:+17035550192">📞 (703) 555-0192</a>
+    <a href="mailto:roshan@roshandetailing.com">✉️ roshan@roshandetailing.com</a>
+    <span style="color:rgba(255,255,255,0.4)">🕐 Mon – Fri &nbsp;|&nbsp; 1 PM – 5 PM</span>
+  </div>
+
+  <div class="footer-copy">
+    &copy; 2026 Roshan's Car Detailing. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = '✓ Request Sent! We\'ll be in touch soon.';
+    btn.style.background = '#2e7d32';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Booking Request ➜';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 4000);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Closet Club — Restoring Dignity, One Outfit at a Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple:       #7C3AED;
+            --purple-dark:  #4C1D95;
+            --purple-mid:   #6D28D9;
+            --purple-light: #EDE9FE;
+            --purple-pale:  #F5F3FF;
+            --white:        #FFFFFF;
+            --off-white:    #FAFAFA;
+            --text:         #1F1235;
+            --text-mid:     #6B7280;
+            --gold:         #D4A853;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* ─────────────────── NAVBAR ─────────────────── */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--purple-light);
+            padding: 0 2.5rem; height: 72px;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: box-shadow 0.3s;
+        }
+        nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+
+        .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .nav-logo-icon {
+            width: 42px; height: 42px; background: var(--purple);
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 1.2rem;
+        }
+        .nav-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-weight: 700; color: var(--purple-dark); line-height: 1.1;
+        }
+        .nav-logo-text span {
+            display: block; font-family: 'Inter', sans-serif;
+            font-size: 0.6rem; font-weight: 400; color: var(--text-mid);
+            letter-spacing: 0.14em; text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--text);
+            font-size: 0.875rem; font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--purple); }
+
+        .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+        .nav-phone {
+            display: flex; align-items: center; gap: 0.35rem;
+            font-size: 0.875rem; font-weight: 600;
+            color: var(--purple-dark); text-decoration: none; transition: color 0.2s;
+        }
+        .nav-phone:hover { color: var(--purple); }
+
+        .btn-primary {
+            background: var(--purple); color: white;
+            padding: 0.6rem 1.4rem; border-radius: 50px;
+            font-size: 0.875rem; font-weight: 600;
+            text-decoration: none; border: none; cursor: pointer;
+            transition: all 0.2s; display: inline-block;
+        }
+        .btn-primary:hover {
+            background: var(--purple-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(124,58,237,0.3);
+        }
+        .btn-outline-white {
+            background: transparent; color: white;
+            border: 2px solid rgba(255,255,255,0.6);
+            padding: 0.8rem 1.8rem; border-radius: 50px;
+            font-size: 1rem; font-weight: 600;
+            text-decoration: none; transition: all 0.2s; display: inline-block;
+        }
+        .btn-outline-white:hover {
+            background: rgba(255,255,255,0.15); border-color: white;
+        }
+
+        /* ─────────────────── HERO ─────────────────── */
+        .hero {
+            min-height: 100vh; position: relative;
+            display: flex; align-items: center; overflow: hidden; padding-top: 72px;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(76,29,149,0.92) 0%, rgba(109,40,217,0.80) 50%, rgba(124,58,237,0.65) 100%);
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            max-width: 1200px; margin: 0 auto; padding: 5rem 2rem;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+        }
+        .hero-text h1 {
+            font-size: clamp(2.8rem, 5.5vw, 4.5rem); color: white;
+            line-height: 1.05; margin-bottom: 1.5rem;
+        }
+        .hero-text h1 em { color: var(--gold); font-style: italic; }
+        .hero-tagline {
+            font-size: 1.1rem; color: rgba(255,255,255,0.88);
+            line-height: 1.8; margin-bottom: 2rem;
+        }
+        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-actions .btn-primary { padding: 0.9rem 2rem; font-size: 1rem; }
+
+        .hero-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 24px; padding: 2.5rem; color: white;
+        }
+        .hero-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--gold);
+        }
+        .hero-stat {
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+        .hero-stat-icon {
+            width: 46px; height: 46px;
+            background: rgba(212,168,83,0.18); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.35rem; flex-shrink: 0;
+        }
+        .hero-stat-num { font-size: 1.5rem; font-weight: 700; color: white; }
+        .hero-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-top: 0.1rem; }
+
+        /* ─────────────────── TRUST BAR ─────────────────── */
+        .trust-bar {
+            background: var(--purple-dark); padding: 1rem 2rem;
+            display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex; align-items: center; gap: 0.5rem;
+            color: rgba(255,255,255,0.88); font-size: 0.85rem; font-weight: 500;
+        }
+        .trust-dot { color: var(--gold); font-size: 0.6rem; }
+
+        /* ─────────────────── SHARED ─────────────────── */
+        section { padding: 5.5rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-label {
+            font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--purple); margin-bottom: 0.6rem;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            color: var(--text); margin-bottom: 1rem; line-height: 1.2;
+        }
+        .section-subtitle {
+            font-size: 1.02rem; color: var(--text-mid);
+            max-width: 580px; line-height: 1.8;
+        }
+
+        /* ─────────────────── MISSION ─────────────────── */
+        .mission { background: var(--purple-pale); }
+        .mission-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 4rem; align-items: center;
+        }
+        .mission-image { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/3; }
+        .mission-image img { width: 100%; height: 100%; object-fit: cover; }
+        .mission-badge {
+            position: absolute; bottom: 1.5rem; left: 1.5rem;
+            background: white; border-radius: 14px;
+            padding: 1rem 1.4rem; box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .badge-icon { font-size: 2rem; }
+        .badge-text strong { display: block; font-size: 1rem; color: var(--purple-dark); }
+        .badge-text span { font-size: 0.72rem; color: var(--text-mid); }
+
+        .mission-content .section-subtitle { max-width: 100%; margin-bottom: 1.5rem; }
+        .feature-list { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 2rem; }
+        .feature-item { display: flex; gap: 1rem; align-items: flex-start; }
+        .feature-icon {
+            width: 42px; height: 42px; background: var(--purple-light);
+            border-radius: 10px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+        }
+        .feature-text strong { display: block; font-weight: 600; margin-bottom: 0.15rem; }
+        .feature-text p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.5; }
+
+        /* ─────────────────── PROCESS ─────────────────── */
+        .process { background: white; }
+        .process-header { text-align: center; max-width: 580px; margin: 0 auto 3.5rem; }
+        .process-header .section-subtitle { margin: 0 auto; }
+
+        .steps-row { display: grid; gap: 1.5rem; position: relative; }
+        .steps-row-4 { grid-template-columns: repeat(4, 1fr); }
+        .steps-row-3 {
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 75%; margin: 2.5rem auto 0;
+        }
+        .steps-row-4::before {
+            content: '';
+            position: absolute; top: 28px;
+            left: calc(12.5% + 14px); right: calc(12.5% + 14px);
+            height: 2px; background: linear-gradient(90deg, var(--purple-light), var(--purple), var(--purple-light));
+            z-index: 0;
+        }
+        .step-card { text-align: center; position: relative; z-index: 1; }
+        .step-icon-wrap {
+            width: 56px; height: 56px; background: var(--purple); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; margin: 0 auto 1rem;
+            border: 4px solid white; box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+            position: relative;
+        }
+        .step-num {
+            position: absolute; top: -6px; right: -6px;
+            width: 20px; height: 20px; background: var(--gold);
+            border-radius: 50%; font-size: 0.6rem; font-weight: 700; color: white;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .step-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .step-desc { font-size: 0.8rem; color: var(--text-mid); line-height: 1.55; }
+
+        .process-banner {
+            margin-top: 3.5rem; border-radius: 24px; overflow: hidden;
+            height: 280px; position: relative;
+        }
+        .process-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .process-banner-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to right, rgba(76,29,149,0.88) 0%, transparent 65%);
+            display: flex; align-items: center; padding: 3rem;
+        }
+        .process-quote { color: white; max-width: 420px; }
+        .process-quote p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem; font-style: italic; line-height: 1.5;
+        }
+        .process-quote cite {
+            display: block; margin-top: 0.75rem;
+            font-size: 0.8rem; color: rgba(255,255,255,0.65); font-style: normal;
+        }
+
+        /* ─────────────────── DIFFERENCE ─────────────────── */
+        .difference { background: var(--purple); text-align: center; }
+        .difference .section-label { color: rgba(255,255,255,0.65); }
+        .difference .section-title { color: white; margin: 0 auto 0.5rem; }
+        .difference .section-subtitle { color: rgba(255,255,255,0.75); margin: 0 auto 3rem; }
+        .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .diff-card {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 18px; padding: 2rem;
+        }
+        .diff-card-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+        .diff-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.75rem; color: white; }
+        .diff-card p { font-size: 0.9rem; color: rgba(255,255,255,0.78); line-height: 1.7; }
+
+        /* ─────────────────── ABOUT ─────────────────── */
+        .about { background: var(--off-white); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
+        .about-image-col { position: relative; }
+        .about-img-main { width: 100%; aspect-ratio: 3/4; border-radius: 24px; overflow: hidden; }
+        .about-img-main img { width: 100%; height: 100%; object-fit: cover; }
+        .about-img-accent {
+            position: absolute; bottom: -1.5rem; right: -1.5rem;
+            width: 140px; height: 140px; border-radius: 16px; overflow: hidden;
+            border: 4px solid white; box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+        }
+        .about-img-accent img { width: 100%; height: 100%; object-fit: cover; }
+        .about-stats {
+            background: var(--purple); color: white; border-radius: 14px;
+            padding: 1.2rem 1.5rem; margin-top: 2rem;
+            display: flex; gap: 0;
+        }
+        .about-stat { text-align: center; flex: 1; border-right: 1px solid rgba(255,255,255,0.2); }
+        .about-stat:last-child { border-right: none; }
+        .about-stat-num { font-size: 1.4rem; font-weight: 700; }
+        .about-stat-label { font-size: 0.68rem; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.06em; }
+
+        .about-content blockquote {
+            border-left: 4px solid var(--purple); padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-style: italic;
+            color: var(--purple-dark); line-height: 1.6;
+        }
+        .about-content p {
+            font-size: 0.97rem; color: var(--text-mid);
+            line-height: 1.85; margin-bottom: 1rem;
+        }
+
+        /* ─────────────────── PARTNER ─────────────────── */
+        .partner { background: white; }
+        .partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+        .partner-content .section-subtitle { max-width: 100%; margin-bottom: 1rem; }
+        .partner-badge {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            background: var(--purple-light); border: 2px solid var(--purple);
+            border-radius: 50px; padding: 0.55rem 1.25rem; margin-top: 1.5rem;
+        }
+        .partner-badge span { font-size: 0.875rem; font-weight: 600; color: var(--purple-dark); }
+        .partner-image { border-radius: 20px; overflow: hidden; aspect-ratio: 16/9; }
+        .partner-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ─────────────────── RECYCLING ─────────────────── */
+        .recycling { background: var(--purple-pale); }
+        .recycling-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: center; }
+        .recycling-content .section-subtitle { max-width: 100%; }
+        .recycle-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+        .recycle-item {
+            background: white; border-radius: 14px; padding: 1.25rem;
+            text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+        .recycle-item-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .recycle-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .recycle-item p { font-size: 0.75rem; color: var(--text-mid); line-height: 1.4; }
+        .recycling-image { border-radius: 24px; overflow: hidden; aspect-ratio: 3/4; }
+        .recycling-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ─────────────────── TESTIMONIALS ─────────────────── */
+        .testimonials { background: var(--purple-dark); color: white; }
+        .testimonials .section-label { color: rgba(255,255,255,0.6); }
+        .testimonials .section-title { color: white; }
+        .testimonials-header { text-align: center; margin-bottom: 3rem; }
+        .testimonials-header .section-subtitle {
+            color: rgba(255,255,255,0.65); margin: 0.6rem auto 0;
+        }
+        .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .testi-card {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px; padding: 1.75rem;
+        }
+        .stars { color: var(--gold); letter-spacing: 2px; margin-bottom: 1rem; font-size: 0.95rem; }
+        .testi-text {
+            font-size: 0.92rem; line-height: 1.75;
+            color: rgba(255,255,255,0.83); font-style: italic; margin-bottom: 1.4rem;
+        }
+        .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+        .testi-avatar {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: var(--purple); display: flex;
+            align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+        }
+        .testi-name { font-weight: 600; font-size: 0.88rem; }
+        .testi-role { font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+
+        /* ─────────────────── CTA STRIP ─────────────────── */
+        .cta-strip {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+            padding: 3.5rem 2rem; text-align: center;
+        }
+        .cta-strip h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: white; margin-bottom: 0.75rem;
+        }
+        .cta-strip p { font-size: 1rem; color: rgba(255,255,255,0.78); margin-bottom: 1.75rem; }
+        .cta-strip .btn-primary { padding: 0.9rem 2.5rem; font-size: 1rem; }
+
+        /* ─────────────────── CONTACT ─────────────────── */
+        .contact { background: white; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; }
+        .contact-info .section-subtitle { max-width: 100%; margin-bottom: 2rem; }
+        .contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
+        .contact-detail { display: flex; align-items: flex-start; gap: 1rem; }
+        .contact-detail-icon {
+            width: 44px; height: 44px; background: var(--purple-light);
+            border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+        }
+        .contact-detail-text strong { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.15rem; }
+        .contact-detail-text p, .contact-detail-text a {
+            font-size: 0.875rem; color: var(--text-mid);
+        }
+        .contact-detail-text a { color: var(--purple); text-decoration: none; }
+        .contact-detail-text a:hover { text-decoration: underline; }
+
+        .contact-form-wrap { background: var(--purple-pale); border-radius: 24px; padding: 2.5rem; }
+        .form-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.4rem; }
+        .form-subtitle { font-size: 0.875rem; color: var(--text-mid); margin-bottom: 1.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #E5E7EB;
+            border-radius: 10px; font-size: 0.875rem; font-family: 'Inter', sans-serif;
+            color: var(--text); background: white; transition: border-color 0.2s; outline: none;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+        }
+        .form-group textarea { resize: vertical; min-height: 90px; }
+        .form-submit {
+            width: 100%; padding: 0.9rem; background: var(--purple);
+            color: white; border: none; border-radius: 10px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: all 0.2s; font-family: 'Inter', sans-serif; margin-top: 0.25rem;
+        }
+        .form-submit:hover {
+            background: var(--purple-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(124,58,237,0.3);
+        }
+
+        /* ─────────────────── FOOTER ─────────────────── */
+        footer { background: #100C22; color: rgba(255,255,255,0.75); padding: 4rem 2rem 1.5rem; }
+        .footer-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem; margin-bottom: 3rem;
+        }
+        .footer-brand p {
+            font-size: 0.875rem; line-height: 1.75;
+            margin: 1rem 0; color: rgba(255,255,255,0.55);
+        }
+        .footer-phone {
+            color: var(--purple-light); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+        }
+        .footer-socials { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+        .social-btn {
+            width: 38px; height: 38px; background: rgba(255,255,255,0.07);
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; text-decoration: none;
+            font-size: 0.95rem; transition: background 0.2s;
+        }
+        .social-btn:hover { background: var(--purple); }
+        .footer-col h4 {
+            font-size: 0.8rem; font-weight: 700; color: white;
+            text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;
+        }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a {
+            color: rgba(255,255,255,0.55); text-decoration: none;
+            font-size: 0.875rem; transition: color 0.2s;
+        }
+        .footer-col a:hover { color: white; }
+        .footer-bottom {
+            max-width: 1200px; margin: 0 auto;
+            padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.78rem; color: rgba(255,255,255,0.35);
+        }
+
+        /* ─────────────────── RESPONSIVE ─────────────────── */
+        @media (max-width: 960px) {
+            .hero-content { grid-template-columns: 1fr; }
+            .hero-card { display: none; }
+            .mission-grid, .about-grid, .partner-grid,
+            .recycling-grid, .contact-grid { grid-template-columns: 1fr; }
+            .steps-row-4 { grid-template-columns: repeat(2, 1fr); }
+            .steps-row-4::before { display: none; }
+            .steps-row-3 { max-width: 100%; }
+            .diff-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .testi-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .nav-links { display: none; }
+            .about-img-accent { display: none; }
+        }
+        @media (max-width: 600px) {
+            section { padding: 3.5rem 1.25rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .trust-bar { gap: 1rem; }
+            .hero-actions { flex-direction: column; }
+            .about-stats { flex-direction: column; gap: 0.75rem; }
+            .about-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.75rem; }
+            .about-stat:last-child { border-bottom: none; }
+            .testi-grid { grid-template-columns: 1fr; }
+            .steps-row-3 { grid-template-columns: 1fr; }
+            .recycle-items { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">👗</div>
+        <div class="nav-logo-text">
+            Clean Closet Club
+            <span>Clothing with Dignity</span>
+        </div>
+    </a>
+
+    <div class="nav-links">
+        <a href="#mission">Mission</a>
+        <a href="#process">How It Works</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Stories</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="nav-right">
+        <a href="tel:2819109456" class="nav-phone">📞 (281) 910-9456</a>
+        <a href="#contact" class="btn-primary">Sign Up to Donate</a>
+    </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <div class="section-label" style="color:rgba(212,168,83,0.9);">✦ Serving the Texas Community</div>
+            <h1>Clean<br>Closet<br><em>Club</em></h1>
+            <p class="hero-tagline">
+                Bridging compassion and community — connecting generous donors with neighbors who deserve a fresh start, one outfit at a time.
+            </p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn-primary">Donate Your Clothes</a>
+                <a href="#process" class="btn-outline-white">See How It Works</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <h3>Our Impact at a Glance</h3>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">👗</div>
+                <div>
+                    <div class="hero-stat-num">3,000+</div>
+                    <div class="hero-stat-label">Items donated to those in need</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">🤝</div>
+                <div>
+                    <div class="hero-stat-num">3 Years</div>
+                    <div class="hero-stat-label">Of dedicated community service</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">💜</div>
+                <div>
+                    <div class="hero-stat-num">100%</div>
+                    <div class="hero-stat-label">Dignity-first, every recipient</div>
+                </div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-icon">♻️</div>
+                <div>
+                    <div class="hero-stat-num">Zero Waste</div>
+                    <div class="hero-stat-label">All textiles recycled or repurposed</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ TRUST BAR ═══════════════ -->
+<div class="trust-bar">
+    <div class="trust-item"><span class="trust-dot">✦</span> Free doorstep pickup</div>
+    <div class="trust-item"><span class="trust-dot">✦</span> Partnered with Clothed by Faith</div>
+    <div class="trust-item"><span class="trust-dot">✦</span> Purple gift bag presentation</div>
+    <div class="trust-item"><span class="trust-dot">✦</span> 100% textile recycling</div>
+    <div class="trust-item"><span class="trust-dot">✦</span> Serving Houston, Texas</div>
+</div>
+
+<!-- ═══════════════ MISSION ═══════════════ -->
+<section class="mission" id="mission">
+    <div class="container">
+        <div class="mission-grid">
+            <div class="mission-image">
+                <img
+                    src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80"
+                    alt="Neatly folded clothes ready for donation"
+                    loading="lazy">
+                <div class="mission-badge">
+                    <div class="badge-icon">💜</div>
+                    <div class="badge-text">
+                        <strong>Dignity First</strong>
+                        <span>Every recipient deserves respect</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mission-content">
+                <div class="section-label">Our Mission</div>
+                <h2 class="section-title">More Than Clothes —<br>Restoring Confidence</h2>
+                <p class="section-subtitle">
+                    At Clean Closet Club, we believe that everyone deserves to feel confident and dignified. We bridge the gap between generous donors and neighbors in need, ensuring that every piece of clothing is given with love and received with grace.
+                </p>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">🚗</div>
+                        <div class="feature-text">
+                            <strong>Free Doorstep Pickup</strong>
+                            <p>We come to you — making donating as easy as opening your front door. No drop-off trips, no hassle.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎁</div>
+                        <div class="feature-text">
+                            <strong>Purple Gift Bag Presentation</strong>
+                            <p>Every donation is beautifully packaged in a signature purple gift bag, preserving the dignity of every recipient.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">♻️</div>
+                        <div class="feature-text">
+                            <strong>Zero Textile Waste</strong>
+                            <p>Clothes that can't be donated are recycled into thread, rope, and rubber playground padding.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-text">
+                            <strong>Community Partnership</strong>
+                            <p>Proudly partnered with Clothed by Faith, amplifying our impact across the Texas community.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ PROCESS ═══════════════ -->
+<section class="process" id="process">
+    <div class="container">
+        <div class="process-header">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">From Your Closet to Someone's Fresh Start</h2>
+            <p class="section-subtitle">A simple, thoughtful process that honors both the donor and the recipient every step of the way.</p>
+        </div>
+
+        <!-- Steps Row 1 -->
+        <div class="steps-row steps-row-4">
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    🚗
+                    <span class="step-num">1</span>
+                </div>
+                <div class="step-title">Pickup</div>
+                <div class="step-desc">We drive to your home and collect your gently used clothes and accessories.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    🏠
+                    <span class="step-num">2</span>
+                </div>
+                <div class="step-title">Transport</div>
+                <div class="step-desc">Donations are carefully transported to Clothed by Faith.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    👕
+                    <span class="step-num">3</span>
+                </div>
+                <div class="step-title">Sort & Assess</div>
+                <div class="step-desc">We sort all items — wearable pieces are set aside; others go to recycling.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    📋
+                    <span class="step-num">4</span>
+                </div>
+                <div class="step-title">Receive Request</div>
+                <div class="step-desc">A request comes in from someone in need, with their sizes and preferences.</div>
+            </div>
+        </div>
+
+        <!-- Steps Row 2 -->
+        <div class="steps-row steps-row-3">
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    🛍️
+                    <span class="step-num">5</span>
+                </div>
+                <div class="step-title">"Shopping" Trip</div>
+                <div class="step-desc">We personally curate a selection tailored to each recipient's unique needs.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    🎁
+                    <span class="step-num">6</span>
+                </div>
+                <div class="step-title">Wrap with Love</div>
+                <div class="step-desc">Clothes are beautifully wrapped in our signature purple gift bag.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    💜
+                    <span class="step-num">7</span>
+                </div>
+                <div class="step-title">Delivered</div>
+                <div class="step-desc">The gift is delivered, restoring confidence at the start of a new chapter.</div>
+            </div>
+        </div>
+
+        <div class="process-banner">
+            <img
+                src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1400&q=80"
+                alt="Community volunteers coming together"
+                loading="lazy">
+            <div class="process-banner-overlay">
+                <div class="process-quote">
+                    <p>"Every person deserves to receive a gift, not just a hand-me-down."</p>
+                    <cite>— The Clean Closet Club Promise</cite>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ WHAT SETS US APART ═══════════════ -->
+<section class="difference">
+    <div class="container">
+        <div class="section-label">What Sets Us Apart</div>
+        <h2 class="section-title">The Clean Closet Difference</h2>
+        <p class="section-subtitle">Three commitments that make us unlike any other clothing charity.</p>
+        <div class="diff-grid">
+            <div class="diff-card">
+                <div class="diff-card-icon">🎁</div>
+                <h3>The Purple Gift Bag</h3>
+                <p>Every recipient receives their items in a beautiful purple gift bag — because getting help should feel like receiving a gift, not accepting charity. Dignity is non-negotiable at Clean Closet Club.</p>
+            </div>
+            <div class="diff-card">
+                <div class="diff-card-icon">🚗</div>
+                <h3>We Come to You</h3>
+                <p>Donating should be easy. We drive directly to your home to pick up your donations, removing every barrier that might stop someone from giving back to the community.</p>
+            </div>
+            <div class="diff-card">
+                <div class="diff-card-icon">♻️</div>
+                <h3>Nothing Goes to Waste</h3>
+                <p>Clothes that can't be donated are transformed into thread, rope, and rubber padding on playgrounds — giving every fabric a second life and keeping textiles out of landfills.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image-col">
+                <div class="about-img-main">
+                    <img
+                        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"
+                        alt="Lauren Carlsen, Founder of Clean Closet Club"
+                        loading="lazy">
+                </div>
+                <div class="about-img-accent">
+                    <img
+                        src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=300&q=80"
+                        alt="Community service"
+                        loading="lazy">
+                </div>
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <div class="about-stat-num">3,000+</div>
+                        <div class="about-stat-label">Items Donated</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-num">3 Yrs</div>
+                        <div class="about-stat-label">Of Service</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-num">100%</div>
+                        <div class="about-stat-label">Heart & Soul</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-content">
+                <div class="section-label">Meet the Founder</div>
+                <h2 class="section-title">Lauren Carlsen</h2>
+                <blockquote>
+                    "I have seen friends and family in a time of their life where basic necessities like clothes were not available. Clean Closet Club works to restore dignity and peace on the giving and receiving end."
+                </blockquote>
+                <p>
+                    My name is Lauren Carlsen. I am a 16-year-old pageant queen, dedicated to serving my Texas community. I have a passion for this movement because I have seen firsthand what it means to struggle with accessing basic necessities — and I believe every person deserves to feel seen, cared for, and valued.
+                </p>
+                <p>
+                    Over the past three years, I have donated 3,000+ items to people in need — not just clothes, but confidence, stability, and a fresh start. Every purple gift bag is packed with care because the way we give matters just as much as what we give.
+                </p>
+                <p>
+                    Clothes that can't be repurposed are recycled into thread, rope, and even rubber padding on playgrounds — because nothing should go to waste when it can still serve a purpose in our community.
+                </p>
+                <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">Get Involved Today</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ PARTNER ═══════════════ -->
+<section class="partner" id="partner">
+    <div class="container">
+        <div class="partner-grid">
+            <div class="partner-content">
+                <div class="section-label">Our Partner</div>
+                <h2 class="section-title">Clothed by Faith</h2>
+                <p class="section-subtitle">
+                    We are proud to partner with Clothed by Faith, a local Texas charity sharing our vision of dignity and compassion. Together, we amplify our reach and ensure that every donation finds someone who truly needs it.
+                </p>
+                <p class="section-subtitle" style="margin-top:1rem;">
+                    Our partnership creates a seamless pipeline — connecting your donations with real requests from real people who are beginning a new chapter and need a gentle push forward.
+                </p>
+                <div class="partner-badge">
+                    <span>✝️</span>
+                    <span>Official Partner: Clothed by Faith</span>
+                </div>
+            </div>
+            <div class="partner-image">
+                <img
+                    src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80"
+                    alt="Volunteers working together in the community"
+                    loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ RECYCLING ═══════════════ -->
+<section class="recycling">
+    <div class="container">
+        <div class="recycling-grid">
+            <div class="recycling-content">
+                <div class="section-label">Zero Waste Initiative</div>
+                <h2 class="section-title">When Clothes Can't Be Donated, They're Reborn</h2>
+                <p class="section-subtitle">
+                    We believe nothing should go to waste. When clothing is too worn to donate, we ensure every fiber finds a new purpose — reducing textile pollution while continuing to serve the community in new ways.
+                </p>
+                <div class="recycle-items">
+                    <div class="recycle-item">
+                        <div class="recycle-item-icon">🧵</div>
+                        <h4>Thread</h4>
+                        <p>Transformed into sewing thread for new creations</p>
+                    </div>
+                    <div class="recycle-item">
+                        <div class="recycle-item-icon">🪢</div>
+                        <h4>Rope</h4>
+                        <p>Woven into strong, functional rope materials</p>
+                    </div>
+                    <div class="recycle-item">
+                        <div class="recycle-item-icon">🛝</div>
+                        <h4>Playground Padding</h4>
+                        <p>Recycled into rubber safety padding for playgrounds</p>
+                    </div>
+                    <div class="recycle-item">
+                        <div class="recycle-item-icon">🌍</div>
+                        <h4>Zero Landfill</h4>
+                        <p>Every fiber finds a new purpose, nothing is wasted</p>
+                    </div>
+                </div>
+            </div>
+            <div class="recycling-image">
+                <img
+                    src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80"
+                    alt="Eco-friendly textile recycling initiative"
+                    loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="testimonials-header">
+            <div class="section-label">Community Stories</div>
+            <h2 class="section-title">Voices from Our Community</h2>
+            <p class="section-subtitle">Real words from the donors and recipients whose lives have been touched by Clean Closet Club.</p>
+        </div>
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">
+                    "Lauren came right to my door to pick up two bags of clothes. She was so kind and professional. Knowing my clothes would go to someone who truly needed them — and arrive in a beautiful gift bag — made me feel so good about donating. I'll never drop off at a box again."
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👩</div>
+                    <div>
+                        <div class="testi-name">Sarah M.</div>
+                        <div class="testi-role">Donor, Houston TX</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">
+                    "I was going through a really hard time and didn't have money for clothes for an upcoming job interview. When I received the purple bag filled with beautiful, clean outfits, I cried. It wasn't just clothes — it was someone believing in me. I got the job."
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👨</div>
+                    <div>
+                        <div class="testi-name">Marcus T.</div>
+                        <div class="testi-role">Recipient, Texas</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">
+                    "As a partner at Clothed by Faith, working with Lauren has been an absolute joy. Her passion, organization, and genuine heart for people sets Clean Closet Club apart. What she has accomplished at 16 is truly remarkable — our community is so much better for it."
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👩</div>
+                    <div>
+                        <div class="testi-name">Pastor Diana R.</div>
+                        <div class="testi-role">Clothed by Faith, Houston TX</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">
+                    "I donated a huge bin of my kids' outgrown clothes and Lauren picked them up the very next day! The whole process was seamless and I loved hearing exactly who would receive them. Highly recommend to anyone looking to give back in a meaningful way."
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👩</div>
+                    <div>
+                        <div class="testi-name">Jennifer K.</div>
+                        <div class="testi-role">Donor, Katy TX</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">
+                    "After losing everything in a difficult situation, I never expected to receive something so thoughtful. The purple bag made me feel like a person again, not just someone asking for help. Lauren has no idea how much that small gesture changed my entire outlook."
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👩</div>
+                    <div>
+                        <div class="testi-name">Maria L.</div>
+                        <div class="testi-role">Recipient, Texas</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">
+                    "I've been looking for a way to donate that actually honors the people receiving the items. Clean Closet Club does exactly that. Lauren's dedication to dignity sets this organization above any other I've supported. She is going to change the world."
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👨</div>
+                    <div>
+                        <div class="testi-name">Robert A.</div>
+                        <div class="testi-role">Community Supporter</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ CTA STRIP ═══════════════ -->
+<div class="cta-strip">
+    <h2>Ready to Declutter and Make a Difference?</h2>
+    <p>It takes less than 2 minutes to sign up. We'll come to you — all you have to do is say yes.</p>
+    <a href="#contact" class="btn-primary">Schedule a Free Pickup</a>
+</div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="section-label">Reach Out</div>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">
+                    Whether you want to donate, request clothing, or simply learn more about what we do — we'd love to hear from you. Every message is personally read by Lauren.
+                </p>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">📞</div>
+                        <div class="contact-detail-text">
+                            <strong>Phone</strong>
+                            <p><a href="tel:2819109456">(281) 910-9456</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">📧</div>
+                        <div class="contact-detail-text">
+                            <strong>Email</strong>
+                            <p><a href="mailto:hello@cleanclosetclub.com">hello@cleanclosetclub.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">📍</div>
+                        <div class="contact-detail-text">
+                            <strong>Service Area</strong>
+                            <p>Houston & surrounding Texas communities</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">⏰</div>
+                        <div class="contact-detail-text">
+                            <strong>Pickup Availability</strong>
+                            <p>Monday – Saturday, flexible scheduling</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrap">
+                <h3 class="form-title">Sign Up to Donate</h3>
+                <p class="form-subtitle">Fill out the form and we'll be in touch to schedule your free pickup.</p>
+                <form id="donateForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name *</label>
+                            <input type="text" placeholder="Your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name *</label>
+                            <input type="text" placeholder="Your last name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" placeholder="(xxx) xxx-xxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Home Address *</label>
+                        <input type="text" placeholder="Street address" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City *</label>
+                            <input type="text" placeholder="City" required>
+                        </div>
+                        <div class="form-group">
+                            <label>ZIP Code</label>
+                            <input type="text" placeholder="ZIP">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>How can we help?</label>
+                        <select>
+                            <option value="">Select an option</option>
+                            <option>I want to donate clothing</option>
+                            <option>I need clothing assistance</option>
+                            <option>I want to volunteer</option>
+                            <option>General inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Notes</label>
+                        <textarea placeholder="Tell us about what you're donating, your availability, or any questions..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message 💜</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="nav-logo" style="margin-bottom:1rem;">
+                <div class="nav-logo-icon">👗</div>
+                <div class="nav-logo-text" style="color:white;">
+                    Clean Closet Club
+                    <span>Clothing with Dignity</span>
+                </div>
+            </div>
+            <p>Restoring dignity and confidence to Texas communities, one purple gift bag at a time. Proudly partnered with Clothed by Faith.</p>
+            <a href="tel:2819109456" class="footer-phone">📞 (281) 910-9456</a>
+            <div class="footer-socials">
+                <a href="#" class="social-btn" aria-label="Facebook">📘</a>
+                <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+                <a href="#" class="social-btn" aria-label="TikTok">🎵</a>
+                <a href="#" class="social-btn" aria-label="Twitter">🐦</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#mission">Our Mission</a></li>
+                <li><a href="#process">How It Works</a></li>
+                <li><a href="#about">About Lauren</a></li>
+                <li><a href="#testimonials">Community Stories</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Get Involved</h4>
+            <ul>
+                <li><a href="#contact">Donate Clothing</a></li>
+                <li><a href="#contact">Request Clothing</a></li>
+                <li><a href="#contact">Volunteer</a></li>
+                <li><a href="#partner">Clothed by Faith</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="tel:2819109456">(281) 910-9456</a></li>
+                <li><a href="mailto:hello@cleanclosetclub.com">hello@cleanclosetclub.com</a></li>
+                <li><a href="#mission">Houston, Texas</a></li>
+                <li><a href="#contact">Mon–Sat Pickup</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2025 Clean Closet Club. Made with 💜 in Texas.</span>
+        <span>Partnered with Clothed by Faith</span>
+    </div>
+</footer>
+
+<script>
+    // Navbar shadow on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Contact form submission
+    document.getElementById('donateForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('.form-submit');
+        btn.textContent = '✓ Message Sent! We\'ll be in touch soon.';
+        btn.style.background = '#059669';
+        btn.disabled = true;
+        setTimeout(() => {
+            btn.textContent = 'Send Message 💜';
+            btn.style.background = '';
+            btn.disabled = false;
+            this.reset();
+        }, 5000);
+    });
+
+    // Subtle fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.testi-card, .diff-card, .step-card, .recycle-item, .feature-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+</script>
+</body>
+</html>
